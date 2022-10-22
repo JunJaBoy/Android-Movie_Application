@@ -39,6 +39,7 @@ class MovieService {
                 ) {
                     Log.d("API/DAILYBOXOFFICE/S", response.body().toString())
 
+
                     if (response.isSuccessful) {
                         // todo success
 
