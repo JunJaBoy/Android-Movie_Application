@@ -18,6 +18,7 @@ class MovieFragment(override var parentActivity: AppCompatActivity) :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // TODO remove toast
         Toast.makeText(parentActivity, "", Toast.LENGTH_SHORT).show()
         getDailyBoxOffice()
     }

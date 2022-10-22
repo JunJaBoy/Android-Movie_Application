@@ -12,6 +12,5 @@ class MyPageFragment(
         R.layout.fragment_mypage
     ) {
 
-
     override fun observeEvent() {}
 }
