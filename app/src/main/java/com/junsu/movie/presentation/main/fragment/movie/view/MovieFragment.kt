@@ -21,6 +21,7 @@ class MovieFragment(
         getDailyBoxOffice()
     }
 
+    // TODO make it returns value
     private fun getDailyBoxOffice() {
         val movieService = MovieService()
         movieService.getDailyBoxOfficeList("20221020")
