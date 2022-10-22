@@ -2,7 +2,6 @@ package com.junsu.movie.presentation.main.fragment.movie.adapter
 
 import android.annotation.SuppressLint
 import android.graphics.Color
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -42,8 +41,6 @@ class DailyBoxOfficeAdapter(private var movies: ArrayList<DailyBoxOfficeList>? =
         fun bind(movie: DailyBoxOfficeList) {
 
             with(binding) {
-                // TODO REMOVE LOG
-                Log.d("Adapter", "bind: ")
                 tvItemMovieRank.text = movie.rank
                 when (movie.rank) {
                     "1" -> {
