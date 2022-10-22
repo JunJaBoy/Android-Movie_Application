@@ -10,7 +10,9 @@ import com.junsu.movie.presentation.base.BaseFragment
 import com.junsu.movieapplication.R
 import com.junsu.movieapplication.databinding.FragmentMovieBinding
 
-class MovieFragment(override var parentActivity: AppCompatActivity) :
+class MovieFragment(
+    override var parentActivity: AppCompatActivity
+) :
     BaseFragment<FragmentMovieBinding>(
         R.layout.fragment_movie
     ) {
