@@ -3,5 +3,6 @@
     <string name="movie">Movie</string>
     <string name="my_page">My Page</string>
     <string name="movie_title">What?\n to See</string>
-    <string name="movie_daily_boxoffice">Daily BoxOffice</string>
+    <string name="movie_daily_boxOffice">Daily BoxOffice</string>
+    <string name="movie_weekly_boxOffice">Weekly BoxOffice</string>
 </resources>
