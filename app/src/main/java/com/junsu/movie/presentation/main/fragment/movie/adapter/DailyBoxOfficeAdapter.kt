@@ -1,13 +1,14 @@
 package com.junsu.movie.presentation.main.fragment.movie.adapter
 
 import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.junsu.movie.data.model.DailyBoxOfficeList
 import com.junsu.movieapplication.databinding.ItemMovieBinding
 
-class DailyBoxOfficeAdapter(private val movies: ArrayList<DailyBoxOfficeList>) :
+class DailyBoxOfficeAdapter(private var movies: ArrayList<DailyBoxOfficeList>) :
     RecyclerView.Adapter<DailyBoxOfficeAdapter.DailyBoxOfficeViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DailyBoxOfficeViewHolder {
@@ -28,12 +29,19 @@ class DailyBoxOfficeAdapter(private val movies: ArrayList<DailyBoxOfficeList>) :
         return movies.size
     }
 
+    fun updateMovies(newMovies: ArrayList<DailyBoxOfficeList>) {
+        movies = newMovies
+        notifyDataSetChanged()
+    }
+
     inner class DailyBoxOfficeViewHolder(private val binding: ItemMovieBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(movie: DailyBoxOfficeList) {
 
             with(binding) {
+                // TODO REMOVE LOG
+                Log.d("Adapter", "bind: ")
                 tvItemMovieRank.text.let {
                     when (movie.rank) {
                         "1" -> {

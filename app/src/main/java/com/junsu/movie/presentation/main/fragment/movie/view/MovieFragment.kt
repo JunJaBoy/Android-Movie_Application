@@ -1,11 +1,16 @@
 package com.junsu.movie.presentation.main.fragment.movie.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.junsu.movie.data.api.MovieService
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
+import com.junsu.movie.data.model.DailyBoxOfficeList
+import com.junsu.movie.data.repository.main.MovieRepository
 import com.junsu.movie.presentation.base.BaseFragment
 import com.junsu.movie.presentation.main.fragment.movie.adapter.DailyBoxOfficeAdapter
+import com.junsu.movie.presentation.main.fragment.movie.viewmodel.MovieViewModel
 import com.junsu.movieapplication.R
 import com.junsu.movieapplication.databinding.FragmentMovieBinding
 
@@ -16,28 +21,32 @@ class MovieFragment(
     R.layout.fragment_movie
 ) {
 
+    
 
-    private lateinit var dailyBoxOfficeAdapter: DailyBoxOfficeAdapter
+    private var movies = ArrayList<DailyBoxOfficeList>()
+
+    private val dailyBoxOfficeAdapter by lazy {
+        DailyBoxOfficeAdapter(movies)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        Log.d("hihi" , "${movies.toArray()}")
 
-        dailyBoxOfficeAdapter = DailyBoxOfficeAdapter()
+        Log.d("HOIHOI", "${viewModel.getDailyBoxOffice("20221020")}")
+
         binding.rvMovieDaily.adapter = dailyBoxOfficeAdapter
 
 
 
-
-        getDailyBoxOffice()
     }
 
-    // TODO make it returns value
-    private fun getDailyBoxOffice() {
-        val movieService = MovieService()
-        movieService.getDailyBoxOfficeList("20221020")
-        println(movieService.toString())
+    override fun observeEvent() {
+        viewModel.dailyBoxOfficeMovies.observe(
+            this
+        ) {
+            dailyBoxOfficeAdapter.updateMovies(movies)
+        }
     }
-
-    override fun observeEvent() {}
 }
