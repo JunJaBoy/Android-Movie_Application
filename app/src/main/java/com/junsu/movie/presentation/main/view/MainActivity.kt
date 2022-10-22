@@ -23,32 +23,32 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        changeFragment(movieFragment)
         initBottomNavigationView()
     }
 
     private fun initBottomNavigationView() {
-        with(binding.bnMain) {
+        binding.bnMain.run {
             setOnItemSelectedListener {
                 when (it.itemId) {
                     R.id.menu_bn_main_movie -> {
                         changeFragment(movieFragment)
+                        return@setOnItemSelectedListener true
                     }
                     R.id.menu_bn_main_myPage -> {
                         changeFragment(myPageFragment)
-                    }
-                    else -> {
-                        false
+                        return@setOnItemSelectedListener true
                     }
                 }
+                false
             }
             selectedItemId = R.id.menu_bn_main_movie
         }
     }
 
-    private fun changeFragment(fragment: Fragment): Boolean {
+    private fun changeFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction().replace(R.id.frame_main, fragment)
-            .commitAllowingStateLoss()
-        return true
+            .commit()
     }
 
     override fun observeEvent() {
