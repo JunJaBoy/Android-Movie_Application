@@ -33,7 +33,7 @@ abstract class BaseFragment<B : ViewDataBinding>(
 
         binding = DataBindingUtil.inflate(inflater, layoutRes, container, false)
 
-        return super.onCreateView(inflater, container, savedInstanceState)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
