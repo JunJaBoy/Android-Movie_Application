@@ -42,20 +42,17 @@ class DailyBoxOfficeAdapter(private var movies: ArrayList<DailyBoxOfficeList>? =
             with(binding) {
                 // TODO REMOVE LOG
                 Log.d("Adapter", "bind: ")
-                tvItemMovieRank.text.let {
-                    when (movie.rank) {
-                        "1" -> {
-                            this.tvItemMovieRank.setTextColor(Color.YELLOW)
-                        }
-                        "2" -> {
-                            this.tvItemMovieRank.setTextColor(Color.GRAY)
-                        }
-                        "3" -> {
-                            this.tvItemMovieRank.setTextColor(Color.RED)
-                        }
+                tvItemMovieRank.text = movie.rank
+                when (movie.rank) {
+                    "1" -> {
+                        this.tvItemMovieRank.setTextColor(Color.YELLOW)
                     }
-
-                    it
+                    "2" -> {
+                        this.tvItemMovieRank.setTextColor(Color.GRAY)
+                    }
+                    "3" -> {
+                        this.tvItemMovieRank.setTextColor(Color.RED)
+                    }
                 }
                 tvItemMovieTitle.text = movie.title
                 tvItemMovieAudienceTerm.text = movie.dailyAudienceCount
