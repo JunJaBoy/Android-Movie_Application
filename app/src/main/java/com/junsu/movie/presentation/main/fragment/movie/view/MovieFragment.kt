@@ -2,7 +2,6 @@ package com.junsu.movie.presentation.main.fragment.movie.view
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.junsu.movie.data.api.MovieService
 import com.junsu.movie.data.api.RetrofitClient
@@ -20,8 +19,6 @@ class MovieFragment(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // TODO remove toast
-        Toast.makeText(parentActivity, "", Toast.LENGTH_SHORT).show()
         getDailyBoxOffice()
     }
 
