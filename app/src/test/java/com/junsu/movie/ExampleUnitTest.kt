@@ -1,8 +1,5 @@
 package com.junsu.movie
 
-import com.junsu.movie.data.api.MovieService
-import com.junsu.movie.data.api.RetrofitClient
-
 /**
  * Example local unit test, which will execute on the development machine (host).
  *
@@ -10,6 +7,7 @@ import com.junsu.movie.data.api.RetrofitClient
  */
 
 
+/*
 fun main() {
     getDailyBoxOffice()
 }
@@ -19,4 +17,4 @@ fun getDailyBoxOffice() {
     val movieService = MovieService()
     movieService.getDailyBoxOfficeList("20221020")
     println(movieService.toString())
-}
+}*/

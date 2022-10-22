@@ -17,7 +17,7 @@ abstract class BaseFragment<B : ViewDataBinding>(
 
     abstract var parentActivity: AppCompatActivity
 
-    private lateinit var binding: B
+    protected lateinit var binding: B
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
