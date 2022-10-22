@@ -40,9 +40,10 @@
                     android:id="@+id/tv_item_movie_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:ellipsize="end"
+                    android:ellipsize="marquee"
                     android:gravity="center"
-                    android:maxLines="1"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:singleLine="true"
                     android:textSize="16sp"
                     tools:text="영화 제목" />
 

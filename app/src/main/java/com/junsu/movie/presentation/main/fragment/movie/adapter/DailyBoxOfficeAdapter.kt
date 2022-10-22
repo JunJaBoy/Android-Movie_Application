@@ -57,7 +57,10 @@ class DailyBoxOfficeAdapter(private var movies: ArrayList<DailyBoxOfficeList>? =
                         this.tvItemMovieRank.setTextColor(Color.BLACK)
                     }
                 }
-                tvItemMovieTitle.text = movie.title
+                with(tvItemMovieTitle) {
+                    this.text = movie.title
+                    isSelected = true
+                }
                 tvItemMovieAudienceTerm.text = movie.dailyAudienceCount
                 tvItemMovieAudienceTotal.text = movie.totalAudienceCount
             }
