@@ -53,6 +53,9 @@ class DailyBoxOfficeAdapter(private var movies: ArrayList<DailyBoxOfficeList>? =
                     "3" -> {
                         this.tvItemMovieRank.setTextColor(Color.RED)
                     }
+                    else -> {
+                        this.tvItemMovieRank.setTextColor(Color.BLACK)
+                    }
                 }
                 tvItemMovieTitle.text = movie.title
                 tvItemMovieAudienceTerm.text = movie.dailyAudienceCount
