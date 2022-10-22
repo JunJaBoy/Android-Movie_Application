@@ -8,7 +8,7 @@ import retrofit2.http.Query
 
 interface MovieAPI {
     @GET("boxoffice/searchDailyBoxOfficeList.json")
-    fun getDailyBoxOfficeList(
+    suspend fun getDailyBoxOfficeList(
         @Query("key") key: String,
         @Query("targetDt") targetDt: String,
     ): Response<DailyBoxOfficeResponse>

@@ -9,14 +9,14 @@ import com.junsu.movie.data.repository.main.MovieRepository
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
-class MovieViewModel(private val mainRepository: MovieRepository) : ViewModel() {
+class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
 
     private var _dailyBoxOfficeMovies = MutableLiveData<Response<DailyBoxOfficeResponse>>()
     val dailyBoxOfficeMovies: LiveData<Response<DailyBoxOfficeResponse>> = _dailyBoxOfficeMovies
 
     fun getDailyBoxOffice(targetDt: String) {
         viewModelScope.launch {
-            _dailyBoxOfficeMovies.postValue(mainRepository.getDailyBoxOffice(targetDt))
+            _dailyBoxOfficeMovies.value = repository.getDailyBoxOffice(targetDt)
         }
     }
 }

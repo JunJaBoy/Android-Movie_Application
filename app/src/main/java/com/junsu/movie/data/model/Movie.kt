@@ -7,7 +7,7 @@ data class DailyBoxOfficeResponse(
 )
 
 data class DailyBoxOfficeResult(
-    @SerializedName("dailyBoxOfficeList") val dailyBoxOfficeList: List<DailyBoxOfficeList>,
+    @SerializedName("dailyBoxOfficeList") val dailyBoxOfficeList: ArrayList<DailyBoxOfficeList>,
 )
 
 data class DailyBoxOfficeList(

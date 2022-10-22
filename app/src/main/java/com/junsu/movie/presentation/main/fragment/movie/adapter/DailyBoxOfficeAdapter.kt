@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.junsu.movie.data.model.DailyBoxOfficeList
 import com.junsu.movieapplication.databinding.ItemMovieBinding
 
-class DailyBoxOfficeAdapter(private var movies: ArrayList<DailyBoxOfficeList>) :
+class DailyBoxOfficeAdapter(private var movies: ArrayList<DailyBoxOfficeList>? = arrayListOf()) :
     RecyclerView.Adapter<DailyBoxOfficeAdapter.DailyBoxOfficeViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DailyBoxOfficeViewHolder {
@@ -22,11 +22,11 @@ class DailyBoxOfficeAdapter(private var movies: ArrayList<DailyBoxOfficeList>) :
     }
 
     override fun onBindViewHolder(holder: DailyBoxOfficeViewHolder, position: Int) {
-        holder.bind(movies[position])
+        holder.bind(movies!![position])
     }
 
     override fun getItemCount(): Int {
-        return movies.size
+        return movies!!.size
     }
 
     fun updateMovies(newMovies: ArrayList<DailyBoxOfficeList>) {
