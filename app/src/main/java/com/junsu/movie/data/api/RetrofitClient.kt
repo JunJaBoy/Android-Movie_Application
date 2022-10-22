@@ -19,5 +19,4 @@ object RetrofitClient {
     }
 }
 
-// TODO Services
 val movieApiService: MovieAPI = RetrofitClient.getRetrofitClient()!!.create(MovieAPI::class.java)
