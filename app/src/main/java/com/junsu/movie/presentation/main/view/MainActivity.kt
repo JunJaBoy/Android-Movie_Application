@@ -19,6 +19,5 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
     }
 
     override fun observeEvent() {
-        TODO("Not yet implemented")
     }
 }
