@@ -39,7 +39,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/movie_daily_boxoffice"
+                        android:text="@string/movie_daily_boxOffice"
                         android:textColor="@color/black"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -66,13 +66,13 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/movie_daily_boxoffice"
+                        android:text="@string/movie_weekly_boxOffice"
                         android:textColor="@color/black"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rv_movie_weelky"
+                        android:id="@+id/rv_movie_weekly"
                         android:layout_width="match_parent"
                         android:layout_height="150dp"
                         android:orientation="horizontal"
