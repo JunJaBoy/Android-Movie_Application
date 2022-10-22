@@ -10,10 +10,12 @@ import com.junsu.movieapplication.databinding.ActivityMainBinding
 class MainActivity : BaseActivity<ActivityMainBinding>(
     R.layout.activity_main
 ) {
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        getDailyBoxOffice()
     }
 
     fun getDailyBoxOffice() {
