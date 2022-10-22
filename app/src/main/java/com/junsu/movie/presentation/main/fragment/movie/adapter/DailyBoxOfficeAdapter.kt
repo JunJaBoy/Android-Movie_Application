@@ -1,5 +1,6 @@
 package com.junsu.movie.presentation.main.fragment.movie.adapter
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
@@ -37,6 +38,7 @@ class DailyBoxOfficeAdapter(private var movies: ArrayList<DailyBoxOfficeList>? =
     inner class DailyBoxOfficeViewHolder(private val binding: ItemMovieBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
+        @SuppressLint("SetTextI18n")
         fun bind(movie: DailyBoxOfficeList) {
 
             with(binding) {
@@ -61,8 +63,8 @@ class DailyBoxOfficeAdapter(private var movies: ArrayList<DailyBoxOfficeList>? =
                     this.text = movie.title
                     isSelected = true
                 }
-                tvItemMovieAudienceTerm.text = movie.dailyAudienceCount
-                tvItemMovieAudienceTotal.text = movie.totalAudienceCount
+                tvItemMovieAudienceTerm.text = "오늘 : ${movie.dailyAudienceCount}"
+                tvItemMovieAudienceTotal.text = "전체 : ${movie.totalAudienceCount}"
             }
         }
     }
