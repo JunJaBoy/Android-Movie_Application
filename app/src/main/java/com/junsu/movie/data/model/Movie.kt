@@ -3,12 +3,11 @@ package com.junsu.movie.data.model
 import com.google.gson.annotations.SerializedName
 
 data class DailyBoxOfficeResponse(
-    @SerializedName("boxOfficeResult") val boxOfficeResult: BoxOfficeResult,
+    @SerializedName("boxOfficeResult") val boxOfficeResult: DailyBoxOfficeResult,
     @SerializedName("targetDt") val targetDt: String,
 )
 
-data class BoxOfficeResult(
-    @SerializedName("boxofficeType") val boxofficeType: String,
+data class DailyBoxOfficeResult(
     @SerializedName("showRange") val showRange: String,
     @SerializedName("dailyBoxOfficeList") val dailyBoxOfficeList: List<DailyBoxOfficeList>,
 )
