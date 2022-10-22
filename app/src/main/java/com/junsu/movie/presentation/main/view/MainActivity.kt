@@ -18,13 +18,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
 
     }
 
-    fun getDailyBoxOffice() {
-        val rt = RetrofitClient.getRetrofitClient()
-        val movieService = MovieService()
-        movieService.getDailyBoxOfficeList("20221020")
-        println(movieService.toString())
-    }
-
     override fun observeEvent() {
         TODO("Not yet implemented")
     }
