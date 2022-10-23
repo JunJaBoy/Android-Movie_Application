@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.junsu.movie.common.util.getDummyDate
+import com.junsu.movie.common.util.getToday
 import com.junsu.movie.data.model.DailyBoxOfficeResponse
 import com.junsu.movie.data.model.WeeklyBoxOfficeResponse
 import com.junsu.movie.data.repository.main.MovieRepository
@@ -15,7 +16,9 @@ import retrofit2.Response
 class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
 
     init {
-        getDailyBoxOffice(getDummyDate())
+        /* 주말의 경우 API 제공 안 하는 것으로 추정 */
+        getDailyBoxOffice(getToday())
+        /* API에서 더이상 지원하지 않는 기능, 이전 날짜로 대체 제공 */
         getWeeklyBoxOffice(getDummyDate())
     }
 
