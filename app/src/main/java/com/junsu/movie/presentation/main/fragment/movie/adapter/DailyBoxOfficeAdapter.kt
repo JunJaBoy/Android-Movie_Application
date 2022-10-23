@@ -14,9 +14,7 @@ class DailyBoxOfficeAdapter(private var movies: ArrayList<DailyBoxOfficeList>? =
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DailyBoxOfficeViewHolder {
         return DailyBoxOfficeViewHolder(
             ItemMovieBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
+                LayoutInflater.from(parent.context), parent, false
             )
         )
     }
