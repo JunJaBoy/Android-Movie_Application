@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.junsu.movie.common.util.getDummyDate
 import com.junsu.movie.data.model.DailyBoxOfficeResponse
 import com.junsu.movie.data.model.WeeklyBoxOfficeResponse
 import com.junsu.movie.data.repository.main.MovieRepository
@@ -12,6 +13,11 @@ import kotlinx.coroutines.launch
 import retrofit2.Response
 
 class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
+
+    init {
+        getDailyBoxOffice(getDummyDate())
+        getWeeklyBoxOffice(getDummyDate())
+    }
 
     private var _dailyBoxOfficeMovies = MutableLiveData<Response<DailyBoxOfficeResponse>>()
     val dailyBoxOfficeMovies: LiveData<Response<DailyBoxOfficeResponse>> = _dailyBoxOfficeMovies
