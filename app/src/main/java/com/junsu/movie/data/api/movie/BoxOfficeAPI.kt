@@ -1,13 +1,12 @@
-package com.junsu.movie.data.api
+package com.junsu.movie.data.api.movie
 
 import com.junsu.movie.data.model.DailyBoxOfficeResponse
-import com.junsu.movie.data.model.WeeklyBoxOfficeList
 import com.junsu.movie.data.model.WeeklyBoxOfficeResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface MovieAPI {
+interface BoxOfficeAPI {
 
     @GET("boxoffice/searchDailyBoxOfficeList.json")
     suspend fun getDailyBoxOfficeList(
