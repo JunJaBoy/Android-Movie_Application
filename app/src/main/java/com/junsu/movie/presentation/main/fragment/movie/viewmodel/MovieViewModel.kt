@@ -32,11 +32,15 @@ class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
         viewModelScope.launch {
             kotlin.runCatching { repository.getDailyBoxOffice(targetDate) }
                 .onSuccess {
-                    _dailyBoxOfficeMovies.value = it
-                    Log.d("DailyBoxOffice", "${it.body()}")
+                    if (it.isSuccessful) {
+                        _dailyBoxOfficeMovies.value = it
+                        Log.d(TAG, "getDailyBoxOffice success : ${it.body()}")
+                    } else {
+                        Log.d(TAG, "getDailyBoxOffice failure : ${it.errorBody()}")
+                    }
                 }
                 .onFailure {
-                    Log.e("MovieViewModel", "getDailyBoxOffice error", it)
+                    Log.e(TAG, "getDailyBoxOffice error", it)
                 }
         }
     }
@@ -45,11 +49,15 @@ class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
         viewModelScope.launch {
             kotlin.runCatching { repository.getWeeklyBoxOffice(targetDate) }
                 .onSuccess {
-                    _weeklyBoxOfficeMovies.value = it
-                    Log.d("WeeklyBoxOffice", "${it.body()}")
+                    if (it.isSuccessful) {
+                        _weeklyBoxOfficeMovies.value = it
+                        Log.d(TAG, "getWeeklyBoxOffice success : ${it.body()}")
+                    } else {
+                        Log.d(TAG, "getWeeklyBoxOffice failure : ${it.errorBody()}")
+                    }
                 }
                 .onFailure {
-                    Log.e("MovieViewModel", "getWeeklyBoxOffice error", it)
+                    Log.e(TAG, "getWeeklyBoxOffice error", it)
                 }
         }
     }
