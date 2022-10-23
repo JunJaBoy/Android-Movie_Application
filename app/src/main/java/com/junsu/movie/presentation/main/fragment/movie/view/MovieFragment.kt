@@ -2,6 +2,7 @@ package com.junsu.movie.presentation.main.fragment.movie.view
 
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.junsu.movie.common.OnMovieItemClickListener
 import com.junsu.movie.data.repository.main.MovieRepository
