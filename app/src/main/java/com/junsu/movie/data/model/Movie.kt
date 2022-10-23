@@ -22,7 +22,7 @@ data class WeeklyBoxOfficeResponse(
 )
 
 data class WeeklyBoxOfficeResult(
-    @SerializedName("weeklyBoxOfficeList") val weeklyBoxOfficeList: WeeklyBoxOfficeList,
+    @SerializedName("weeklyBoxOfficeList") val weeklyBoxOfficeList: ArrayList<WeeklyBoxOfficeList>,
 )
 
 data class WeeklyBoxOfficeList(
