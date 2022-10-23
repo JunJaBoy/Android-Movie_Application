@@ -10,6 +10,7 @@
         <ScrollView
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:paddingVertical="32dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/guideline_movie_end"
             app:layout_constraintStart_toStartOf="@id/guideline_movie_start"
@@ -23,10 +24,12 @@
                 <TextView
                     android:id="@+id/tv_movie_title"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="160dp"
-                    android:gravity="center"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_movie_title"
+                    android:gravity="start"
+                    android:padding="16dp"
                     android:text="@string/movie_title"
+                    android:textColor="@color/white"
                     android:textSize="48sp" />
 
                 <LinearLayout

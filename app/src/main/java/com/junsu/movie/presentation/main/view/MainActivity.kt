@@ -13,11 +13,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
 ) {
 
     private val movieFragment by lazy {
-        MovieFragment(this)
+        MovieFragment()
     }
 
     private val myPageFragment by lazy {
-        MyPageFragment(this)
+        MyPageFragment()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,7 +48,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
 
     private fun changeFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction().replace(R.id.frame_main, fragment)
-            .commit()
+            .commitAllowingStateLoss()
     }
 
     override fun observeEvent() {

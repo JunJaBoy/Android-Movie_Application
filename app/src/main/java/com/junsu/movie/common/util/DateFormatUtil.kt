@@ -1,5 +1,7 @@
 package com.junsu.movie.common.util
 
 fun getDummyDate(): String {
-    return "20221020"
+    return "20120210"
 }
+
+

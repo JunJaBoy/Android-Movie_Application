@@ -15,7 +15,7 @@ abstract class BaseFragment<B : ViewDataBinding>(
     @LayoutRes private val layoutRes: Int,
 ) : Fragment() {
 
-    abstract var parentActivity: AppCompatActivity
+    protected lateinit var parentActivity: AppCompatActivity
 
     protected lateinit var binding: B
 
