@@ -1,5 +1,7 @@
 package com.junsu.movie.data.api
 
+import com.junsu.movie.data.api.movie.BoxOfficeAPI
+import com.junsu.movie.data.api.movie.MovieAPI
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -17,6 +19,10 @@ object RetrofitClient {
                 .build()
         }
     }
+}
+
+val boxOfficeApiService: BoxOfficeAPI by lazy {
+    RetrofitClient.getRetrofitClient()!!.create(BoxOfficeAPI::class.java)
 }
 
 val movieApiService: MovieAPI by lazy {

@@ -42,8 +42,11 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="@drawable/bg_movie_title"
+                        android:gravity="start"
+                        android:paddingStart="16dp"
                         android:text="@string/movie_daily_boxOffice"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
@@ -70,8 +73,11 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="@drawable/bg_movie_title"
+                        android:gravity="start"
+                        android:paddingStart="16dp"
                         android:text="@string/movie_weekly_boxOffice"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
