@@ -14,12 +14,9 @@ import com.junsu.movieapplication.R
 import com.junsu.movieapplication.databinding.FragmentMovieBinding
 
 // 순위에 따라 금, 은, 동색 순위
-class MovieFragment(
-    override var parentActivity: AppCompatActivity
-) : BaseFragment<FragmentMovieBinding>(
+class MovieFragment: BaseFragment<FragmentMovieBinding>(
     R.layout.fragment_movie
 ) {
-
     private val viewModel by lazy {
         ViewModelProvider(
             this,
