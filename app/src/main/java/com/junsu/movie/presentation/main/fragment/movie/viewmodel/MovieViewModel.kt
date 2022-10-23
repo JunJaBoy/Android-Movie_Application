@@ -68,12 +68,19 @@ class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
         }
     }
 
+    fun getMovieInfo(movieCode: String) {
+        viewModelScope.launch {
+            kotlin.runCatching { repository.getMovieInfo(movieCode) }
+                .onSuccess {
+                    if (it.isSuccessful) {
+                        _movieInfo.value = it
+                        Log.d(tag, "getMovieInfo success : ${it.body()}")
                     } else {
-                        Log.d(TAG, "getWeeklyBoxOffice failure : ${it.errorBody()}")
+                        Log.d(tag, "getMovieInfo failure : ${it.errorBody()}")
                     }
                 }
                 .onFailure {
-                    Log.e(TAG, "getWeeklyBoxOffice error", it)
+                    Log.e(tag, "getMovieInfo error", it)
                 }
         }
     }
