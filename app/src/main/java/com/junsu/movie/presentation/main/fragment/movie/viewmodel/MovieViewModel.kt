@@ -28,9 +28,9 @@ class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
     private var _weeklyBoxOfficeMovies = MutableLiveData<Response<WeeklyBoxOfficeResponse>>()
     val weeklyBoxOfficeMovies: LiveData<Response<WeeklyBoxOfficeResponse>> = _weeklyBoxOfficeMovies
 
-    fun getDailyBoxOffice(targetDt: String) {
+    fun getDailyBoxOffice(targetDate: String) {
         viewModelScope.launch {
-            kotlin.runCatching { repository.getDailyBoxOffice(targetDt) }
+            kotlin.runCatching { repository.getDailyBoxOffice(targetDate) }
                 .onSuccess {
                     _dailyBoxOfficeMovies.value = it
                     Log.d("DailyBoxOffice", "${it.body()}")
@@ -41,9 +41,9 @@ class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
         }
     }
 
-    fun getWeeklyBoxOffice(targetDt: String) {
+    fun getWeeklyBoxOffice(targetDate: String) {
         viewModelScope.launch {
-            kotlin.runCatching { repository.getWeeklyBoxOffice(targetDt) }
+            kotlin.runCatching { repository.getWeeklyBoxOffice(targetDate) }
                 .onSuccess {
                     _weeklyBoxOfficeMovies.value = it
                     Log.d("WeeklyBoxOffice", "${it.body()}")
