@@ -5,10 +5,14 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.junsu.movie.common.OnMovieItemClickListener
 import com.junsu.movie.data.model.WeeklyBoxOfficeList
 import com.junsu.movieapplication.databinding.ItemMovieBinding
 
-class WeeklyBoxOfficeAdapter(private var movies: ArrayList<WeeklyBoxOfficeList>? = arrayListOf()) :
+class WeeklyBoxOfficeAdapter(
+    private val onMovieItemClickListener: OnMovieItemClickListener,
+    private var movies: ArrayList<WeeklyBoxOfficeList>? = arrayListOf()
+) :
     RecyclerView.Adapter<WeeklyBoxOfficeAdapter.WeeklyBoxOfficeViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WeeklyBoxOfficeViewHolder {
@@ -61,6 +65,10 @@ class WeeklyBoxOfficeAdapter(private var movies: ArrayList<WeeklyBoxOfficeList>?
                 }
                 tvItemMovieAudienceTerm.text = "오늘 : ${movie.weeklyAudienceCount}명"
                 tvItemMovieAudienceTotal.text = "전체 : ${movie.totalAudienceCount}명"
+
+                root.setOnClickListener {
+                    onMovieItemClickListener.onMovieItemClick(binding.root, movie)
+                }
             }
         }
     }
