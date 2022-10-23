@@ -18,5 +18,3 @@ object RetrofitClient {
         }
     }
 }
-
-val movieApiService: MovieAPI = RetrofitClient.getRetrofitClient()!!.create(MovieAPI::class.java)
