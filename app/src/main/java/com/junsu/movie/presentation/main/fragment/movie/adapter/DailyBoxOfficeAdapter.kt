@@ -29,6 +29,7 @@ class DailyBoxOfficeAdapter(private var movies: ArrayList<DailyBoxOfficeList>? =
         return movies!!.size
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun updateMovies(newMovies: ArrayList<DailyBoxOfficeList>) {
         movies = newMovies
         notifyDataSetChanged()
@@ -60,8 +61,8 @@ class DailyBoxOfficeAdapter(private var movies: ArrayList<DailyBoxOfficeList>? =
                     this.text = movie.title
                     isSelected = true
                 }
-                tvItemMovieAudienceTerm.text = "오늘 : ${movie.dailyAudienceCount}"
-                tvItemMovieAudienceTotal.text = "전체 : ${movie.totalAudienceCount}"
+                tvItemMovieAudienceTerm.text = "오늘 : ${movie.dailyAudienceCount}명"
+                tvItemMovieAudienceTotal.text = "전체 : ${movie.totalAudienceCount}명"
             }
         }
     }
