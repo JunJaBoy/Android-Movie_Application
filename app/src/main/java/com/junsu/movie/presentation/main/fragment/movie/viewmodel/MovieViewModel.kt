@@ -30,6 +30,7 @@ class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
             kotlin.runCatching { repository.getDailyBoxOffice(targetDt) }
                 .onSuccess {
                     _dailyBoxOfficeMovies.value = it
+                    Log.d("DailyBoxOffice", "${it.body()}")
                 }
                 .onFailure {
                     Log.e("MovieViewModel", "getDailyBoxOffice error", it)
@@ -42,9 +43,10 @@ class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
             kotlin.runCatching { repository.getWeeklyBoxOffice(targetDt) }
                 .onSuccess {
                     _weeklyBoxOfficeMovies.value = it
+                    Log.d("WeeklyBoxOffice", "${it.body()}")
                 }
                 .onFailure {
-                    Log.e("MovieViewModel", "getDailyBoxOffice error", it)
+                    Log.e("MovieViewModel", "getWeeklyBoxOffice error", it)
                 }
         }
     }
