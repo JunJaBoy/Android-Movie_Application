@@ -33,10 +33,12 @@ class WeeklyBoxOfficeAdapter(private var movies: ArrayList<WeeklyBoxOfficeList>?
         notifyDataSetChanged()
     }
 
-    class WeeklyBoxOfficeViewHolder(private val binding: ItemMovieBinding) :
+    inner class WeeklyBoxOfficeViewHolder(private val binding: ItemMovieBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
         @SuppressLint("SetTextI18n")
         fun bind(movie: WeeklyBoxOfficeList) {
+
             with(binding) {
                 tvItemMovieRank.text = movie.rank
                 when (movie.rank) {
