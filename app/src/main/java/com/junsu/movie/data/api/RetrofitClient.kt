@@ -18,3 +18,7 @@ object RetrofitClient {
         }
     }
 }
+
+val movieApiService: MovieAPI by lazy {
+    RetrofitClient.getRetrofitClient()!!.create(MovieAPI::class.java)
+}
