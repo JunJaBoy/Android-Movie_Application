@@ -8,12 +8,15 @@ import androidx.lifecycle.viewModelScope
 import com.junsu.movie.common.util.getDummyDate
 import com.junsu.movie.common.util.getToday
 import com.junsu.movie.data.model.DailyBoxOfficeResponse
+import com.junsu.movie.data.model.MovieInfoResponse
 import com.junsu.movie.data.model.WeeklyBoxOfficeResponse
 import com.junsu.movie.data.repository.main.MovieRepository
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
 class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
+
+    private val tag: String = this.javaClass.simpleName
 
     init {
         /* 주말의 경우 API 제공 안 하는 것으로 추정 */
@@ -28,30 +31,43 @@ class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
     private var _weeklyBoxOfficeMovies = MutableLiveData<Response<WeeklyBoxOfficeResponse>>()
     val weeklyBoxOfficeMovies: LiveData<Response<WeeklyBoxOfficeResponse>> = _weeklyBoxOfficeMovies
 
-    fun getDailyBoxOffice(targetDate: String) {
+    private var _movieInfo = MutableLiveData<Response<MovieInfoResponse>>()
+    val movieInfo: LiveData<Response<MovieInfoResponse>> = _movieInfo
+
+    private fun getDailyBoxOffice(targetDate: String) {
         viewModelScope.launch {
             kotlin.runCatching { repository.getDailyBoxOffice(targetDate) }
                 .onSuccess {
                     if (it.isSuccessful) {
                         _dailyBoxOfficeMovies.value = it
-                        Log.d(TAG, "getDailyBoxOffice success : ${it.body()}")
+                        Log.d(tag, "getDailyBoxOffice success : ${it.body()}")
                     } else {
-                        Log.d(TAG, "getDailyBoxOffice failure : ${it.errorBody()}")
+                        Log.d(tag, "getDailyBoxOffice failure : ${it.errorBody()}")
                     }
                 }
                 .onFailure {
-                    Log.e(TAG, "getDailyBoxOffice error", it)
+                    Log.e(tag, "getDailyBoxOffice error", it)
                 }
         }
     }
 
-    fun getWeeklyBoxOffice(targetDate: String) {
+    private fun getWeeklyBoxOffice(targetDate: String) {
         viewModelScope.launch {
             kotlin.runCatching { repository.getWeeklyBoxOffice(targetDate) }
                 .onSuccess {
                     if (it.isSuccessful) {
                         _weeklyBoxOfficeMovies.value = it
-                        Log.d(TAG, "getWeeklyBoxOffice success : ${it.body()}")
+                        Log.d(tag, "getWeeklyBoxOffice success : ${it.body()}")
+                    } else {
+                        Log.d(tag, "getWeeklyBoxOffice failure : ${it.errorBody()}")
+                    }
+                }
+                .onFailure {
+                    Log.e(tag, "getWeeklyBoxOffice error", it)
+                }
+        }
+    }
+
                     } else {
                         Log.d(TAG, "getWeeklyBoxOffice failure : ${it.errorBody()}")
                     }
