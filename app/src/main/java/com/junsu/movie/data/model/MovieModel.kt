@@ -7,7 +7,7 @@ data class MovieInfoResponse(
 )
 
 data class MovieInfoResult(
-    @SerializedName("movieInfo") val movieInfo: ArrayList<MovieInfo>,
+    @SerializedName("movieInfo") val movieInfo: MovieInfo,
 )
 
 data class MovieInfo(
