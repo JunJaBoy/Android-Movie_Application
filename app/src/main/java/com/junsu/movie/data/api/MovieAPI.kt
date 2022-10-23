@@ -14,7 +14,7 @@ interface MovieAPI {
         @Query("targetDt") targetDt: String,
     ): Response<DailyBoxOfficeResponse>
 
-    @GET("boxoffice/boxoffice/searchWeeklyBoxOfficeList.json")
+    @GET("boxoffice/searchWeeklyBoxOfficeList.json")
     suspend fun getWeeklyBoxOfficeList(
         @Query("key") key: String,
         @Query("targetDt") targetDt: String,
