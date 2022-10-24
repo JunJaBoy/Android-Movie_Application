@@ -30,9 +30,11 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintBottom_toTopOf="@id/layout_dialog_fragment_movie_movie_info_genres"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_dialog_fragment_movie_movie_info_title">
+            app:layout_constraintTop_toBottomOf="@id/tv_dialog_fragment_movie_movie_info_title"
+            app:layout_constraintVertical_chainStyle="packed">
 
             <TextView
                 android:id="@+id/tv_dialog_fragment_movie_movie_info_audit"
@@ -157,16 +159,16 @@
                 android:id="@+id/tv_dialog_fragment_movie_movie_info_add_favorite"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="12dp"
+                android:layout_marginEnd="16dp"
                 android:text="@string/dialog_fragment_movie_movie_info_add_favorite"
-                android:textSize="16sp" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/tv_dialog_fragment_movie_movie_info_add_close"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/dialog_fragment_movie_movie_info_close"
-                android:textSize="16sp" />
+                android:textSize="18sp" />
 
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
