@@ -76,9 +76,12 @@ class MovieFragment : BaseFragment<FragmentMovieBinding>(
             parentActivity
         ) { response ->
             response.body().let {
+
                 movieInfo = it!!.movieInfoResult.movieInfo
+
                 with(dialogBinding) {
                     tvDialogFragmentMovieMovieInfoTitle.text = movieInfo?.title
+
                     tvDialogFragmentMovieMovieInfoAddClose.setOnClickListener {
                         dialog.dismiss()
                     }
