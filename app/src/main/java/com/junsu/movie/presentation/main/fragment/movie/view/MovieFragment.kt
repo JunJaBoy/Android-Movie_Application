@@ -11,6 +11,7 @@ import com.junsu.movie.data.model.MovieInfo
 import com.junsu.movie.data.repository.main.MovieRepository
 import com.junsu.movie.presentation.base.BaseFragment
 import com.junsu.movie.presentation.main.fragment.movie.adapter.DailyBoxOfficeAdapter
+import com.junsu.movie.presentation.main.fragment.movie.adapter.MovieInfoDialogActorsAdapter
 import com.junsu.movie.presentation.main.fragment.movie.adapter.WeeklyBoxOfficeAdapter
 import com.junsu.movie.presentation.main.fragment.movie.viewmodel.MovieViewModel
 import com.junsu.movie.presentation.main.fragment.movie.viewmodel.MovieViewModelFactory
@@ -47,6 +48,10 @@ class MovieFragment : BaseFragment<FragmentMovieBinding>(
         })
     }
 
+    private val movieInfoDialogActorsAdapter by lazy {
+        MovieInfoDialogActorsAdapter(movieInfo?.actors)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerViews()
@@ -80,8 +85,9 @@ class MovieFragment : BaseFragment<FragmentMovieBinding>(
                 movieInfo = it!!.movieInfoResult.movieInfo
 
                 with(dialogBinding) {
+                    dialogBinding.rvDialogFragmentMovieMovieInfoTitleActors.adapter =
+                        movieInfoDialogActorsAdapter
                     tvDialogFragmentMovieMovieInfoTitle.text = movieInfo?.title
-
                     tvDialogFragmentMovieMovieInfoAddClose.setOnClickListener {
                         dialog.dismiss()
                     }
