@@ -9,17 +9,20 @@ import com.junsu.movieapplication.databinding.ItemDialogMovieInfoBinding
 
 class MovieInfoDialogActorsAdapter(
     private var actors: ArrayList<MovieActor>? = arrayListOf()
-) : RecyclerView.Adapter<MovieInfoDialogActorsAdapter.MovieInfoDialogViewHolder>() {
+) : RecyclerView.Adapter<MovieInfoDialogActorsAdapter.MovieInfoDialogActorsViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieInfoDialogViewHolder {
-        return MovieInfoDialogViewHolder(
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): MovieInfoDialogActorsViewHolder {
+        return MovieInfoDialogActorsViewHolder(
             ItemDialogMovieInfoBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false
             )
         )
     }
 
-    override fun onBindViewHolder(holder: MovieInfoDialogViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MovieInfoDialogActorsViewHolder, position: Int) {
         holder.bind(actors!![position])
     }
 
@@ -33,7 +36,7 @@ class MovieInfoDialogActorsAdapter(
         return actors!!.size
     }
 
-    class MovieInfoDialogViewHolder(private val binding: ItemDialogMovieInfoBinding) :
+    inner class MovieInfoDialogActorsViewHolder(private val binding: ItemDialogMovieInfoBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(actor: MovieActor) {
 
