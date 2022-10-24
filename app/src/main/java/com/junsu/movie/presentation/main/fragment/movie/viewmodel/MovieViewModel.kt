@@ -68,7 +68,7 @@ class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
         }
     }
 
-    fun getMovieInfo(movieCode: String) {
+    internal fun getMovieInfo(movieCode: String) {
         viewModelScope.launch {
             kotlin.runCatching { repository.getMovieInfo(movieCode) }
                 .onSuccess {
