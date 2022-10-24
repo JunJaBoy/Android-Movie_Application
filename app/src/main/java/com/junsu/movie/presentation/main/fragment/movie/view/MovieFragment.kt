@@ -58,8 +58,6 @@ class MovieFragment : BaseFragment<FragmentMovieBinding>(
     }
 
     private fun showMovieInfoDialog(movieCode: String) {
-        viewModel.getMovieInfo(movieCode)
-
         val dialogBinding = DialogFragmentMovieMovieInfoBinding
             .inflate(LayoutInflater.from(parentActivity))
 
@@ -73,10 +71,18 @@ class MovieFragment : BaseFragment<FragmentMovieBinding>(
             show()
         }
 
-        with(dialogBinding) {
-            tvDialogFragmentMovieMovieInfoTitle.text = movieInfo?.title
-            tvDialogFragmentMovieMovieInfoAddClose.setOnClickListener {
-                dialog.dismiss()
+        viewModel.getMovieInfo(movieCode)
+        viewModel.movieInfo.observe(
+            parentActivity
+        ) { response ->
+            response.body().let {
+                movieInfo = it!!.movieInfoResult.movieInfo
+                with(dialogBinding) {
+                    tvDialogFragmentMovieMovieInfoTitle.text = movieInfo?.title
+                    tvDialogFragmentMovieMovieInfoAddClose.setOnClickListener {
+                        dialog.dismiss()
+                    }
+                }
             }
         }
     }
@@ -99,14 +105,6 @@ class MovieFragment : BaseFragment<FragmentMovieBinding>(
                 if (it != null) {
                     weeklyBoxOfficeAdapter.updateMovies(it.boxOfficeResult.weeklyBoxOfficeList)
                 }
-            }
-        }
-
-        viewModel.movieInfo.observe(
-            parentActivity
-        ) { response ->
-            response.body().let {
-                movieInfo = it!!.movieInfoResult.movieInfo
             }
         }
     }
