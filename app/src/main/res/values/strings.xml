@@ -8,4 +8,6 @@
     <string name="dialog_fragment_movie_movie_info_genre">Genre</string>
     <string name="dialog_fragment_movie_movie_info_director">Director</string>
     <string name="dialog_fragment_movie_movie_info_actors">Actors</string>
+    <string name="dialog_fragment_movie_movie_info_add_favorite">즐겨찾기 추가</string>
+    <string name="dialog_fragment_movie_movie_info_close">닫기</string>
 </resources>
