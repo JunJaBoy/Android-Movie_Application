@@ -5,4 +5,7 @@
     <string name="movie_title">What?\n to See</string>
     <string name="movie_daily_boxOffice">Daily BoxOffice</string>
     <string name="movie_weekly_boxOffice">Weekly BoxOffice</string>
+    <string name="dialog_fragment_movie_movie_info_genre">Genre</string>
+    <string name="dialog_fragment_movie_movie_info_director">Director</string>
+    <string name="dialog_fragment_movie_movie_info_actors">Actors</string>
 </resources>
