@@ -31,5 +31,5 @@ data class WeeklyBoxOfficeList(
     @SerializedName("movieNm") val title: String,
     @SerializedName("audiCnt") val weeklyAudienceCount: String,
     @SerializedName("audiAcc") val totalAudienceCount: String,
-    @SerializedName("movieCd") val movieCd: String,
+    @SerializedName("movieCd") val movieCode: String,
 )

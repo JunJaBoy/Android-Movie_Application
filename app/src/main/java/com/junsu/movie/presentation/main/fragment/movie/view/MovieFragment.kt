@@ -1,20 +1,27 @@
 package com.junsu.movie.presentation.main.fragment.movie.view
 
+import android.app.Dialog
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.WindowManager
 import androidx.lifecycle.ViewModelProvider
+import com.junsu.movie.common.OnMovieItemClickListener
+import com.junsu.movie.data.model.MovieInfo
 import com.junsu.movie.data.repository.main.MovieRepository
 import com.junsu.movie.presentation.base.BaseFragment
-import com.junsu.movie.presentation.main.fragment.movie.adapter.DailyBoxOfficeAdapter
-import com.junsu.movie.presentation.main.fragment.movie.adapter.WeeklyBoxOfficeAdapter
+import com.junsu.movie.presentation.main.fragment.movie.adapter.*
 import com.junsu.movie.presentation.main.fragment.movie.viewmodel.MovieViewModel
 import com.junsu.movie.presentation.main.fragment.movie.viewmodel.MovieViewModelFactory
 import com.junsu.movieapplication.R
+import com.junsu.movieapplication.databinding.DialogFragmentMovieMovieInfoBinding
 import com.junsu.movieapplication.databinding.FragmentMovieBinding
 
 class MovieFragment : BaseFragment<FragmentMovieBinding>(
     R.layout.fragment_movie
 ) {
+
+    var movieInfo: MovieInfo? = null
 
     private val viewModel by lazy {
         ViewModelProvider(
@@ -24,22 +31,97 @@ class MovieFragment : BaseFragment<FragmentMovieBinding>(
     }
 
     private val dailyBoxOfficeAdapter by lazy {
-        DailyBoxOfficeAdapter()
+        DailyBoxOfficeAdapter(object : OnMovieItemClickListener {
+            override fun onMovieItemClick(view: View, movieCode: String) {
+                showMovieInfoDialog(movieCode)
+            }
+        })
     }
 
     private val weeklyBoxOfficeAdapter by lazy {
-        WeeklyBoxOfficeAdapter()
+        WeeklyBoxOfficeAdapter(object : OnMovieItemClickListener {
+            override fun onMovieItemClick(view: View, movieCode: String) {
+                showMovieInfoDialog(movieCode)
+            }
+        })
+    }
+
+    private val movieInfoDialogActorsAdapter by lazy {
+        MovieInfoDialogActorsAdapter(movieInfo?.actors)
+    }
+
+    private val movieInfoDialogDirectorsAdapter by lazy {
+        MovieInfoDialogDirectorsAdapter(movieInfo?.directors)
+    }
+
+    private val movieInfoDialogGenresAdapter by lazy {
+        MovieInfoDialogGenresAdapter(movieInfo?.genres)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        observeDailyBoxOffice()
-        observeWeeklyBoxOffice()
+        initRecyclerViews()
     }
 
-    private fun observeDailyBoxOffice() {
+    private fun initRecyclerViews() {
         binding.rvMovieDaily.adapter = dailyBoxOfficeAdapter
+        binding.rvMovieWeekly.adapter = weeklyBoxOfficeAdapter
+    }
+
+    private fun showMovieInfoDialog(movieCode: String) {
+        val dialogBinding = DialogFragmentMovieMovieInfoBinding
+            .inflate(LayoutInflater.from(parentActivity))
+
+        val dialog = Dialog(parentActivity).apply {
+            setContentView(dialogBinding.root)
+            setCancelable(false)
+            window!!.attributes.apply {
+                width = WindowManager.LayoutParams.MATCH_PARENT
+                height = WindowManager.LayoutParams.WRAP_CONTENT
+            }
+            show()
+        }
+
+        viewModel.getMovieInfo(movieCode)
+        viewModel.movieInfo.observe(
+            parentActivity
+        ) { response ->
+            response.body().let {
+                movieInfo = it!!.movieInfoResult.movieInfo
+
+                movieInfoDialogActorsAdapter.updateActors(movieInfo!!.actors)
+                movieInfoDialogDirectorsAdapter.updateActors(movieInfo!!.directors)
+                movieInfoDialogGenresAdapter.updateActors(movieInfo!!.genres)
+
+                initDialogBinding(dialogBinding, dialog)
+            }
+        }
+    }
+
+    private fun initDialogBinding(
+        dialogBinding: DialogFragmentMovieMovieInfoBinding,
+        dialog: Dialog
+    ) {
+        with(dialogBinding) {
+
+
+            rvDialogFragmentMovieMovieInfoTitleActors.adapter =
+                movieInfoDialogActorsAdapter
+
+            rvDialogFragmentMovieMovieInfoTitleDirectors.adapter =
+                movieInfoDialogDirectorsAdapter
+
+            rvDialogFragmentMovieMovieInfoTitleGenres.adapter =
+                movieInfoDialogGenresAdapter
+
+            tvDialogFragmentMovieMovieInfoTitle.text = movieInfo?.title
+            tvDialogFragmentMovieMovieInfoAddClose.setOnClickListener {
+                dialog.dismiss()
+            }
+        }
+    }
+
+    override fun observeEvent() {
         viewModel.dailyBoxOfficeMovies.observe(
             parentActivity
         ) { response ->
@@ -49,10 +131,7 @@ class MovieFragment : BaseFragment<FragmentMovieBinding>(
                 }
             }
         }
-    }
 
-    private fun observeWeeklyBoxOffice() {
-        binding.rvMovieWeekly.adapter = weeklyBoxOfficeAdapter
         viewModel.weeklyBoxOfficeMovies.observe(
             parentActivity
         ) { response ->
@@ -62,8 +141,5 @@ class MovieFragment : BaseFragment<FragmentMovieBinding>(
                 }
             }
         }
-    }
-
-    override fun observeEvent() {
     }
 }
