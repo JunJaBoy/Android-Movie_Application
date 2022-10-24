@@ -1,9 +1,12 @@
 package com.junsu.movie.presentation.main.fragment.movie.view
 
+import android.app.Dialog
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.junsu.movie.common.OnMovieItemClickListener
+import com.junsu.movie.data.model.MovieInfo
 import com.junsu.movie.data.repository.main.MovieRepository
 import com.junsu.movie.presentation.base.BaseFragment
 import com.junsu.movie.presentation.main.fragment.movie.adapter.DailyBoxOfficeAdapter
@@ -11,6 +14,7 @@ import com.junsu.movie.presentation.main.fragment.movie.adapter.WeeklyBoxOfficeA
 import com.junsu.movie.presentation.main.fragment.movie.viewmodel.MovieViewModel
 import com.junsu.movie.presentation.main.fragment.movie.viewmodel.MovieViewModelFactory
 import com.junsu.movieapplication.R
+import com.junsu.movieapplication.databinding.DialogFragmentMovieMovieInfoBinding
 import com.junsu.movieapplication.databinding.FragmentMovieBinding
 
 class MovieFragment : BaseFragment<FragmentMovieBinding>(
@@ -26,16 +30,16 @@ class MovieFragment : BaseFragment<FragmentMovieBinding>(
 
     private val dailyBoxOfficeAdapter by lazy {
         DailyBoxOfficeAdapter(object : OnMovieItemClickListener {
-            override fun onMovieItemClick(view: View, movie: ArrayList<Any>) {
-                showMovieInfoDialog(movie)
+            override fun onMovieItemClick(view: View, movieCode: String) {
+                showMovieInfoDialog(movieCode)
             }
         })
     }
 
     private val weeklyBoxOfficeAdapter by lazy {
         WeeklyBoxOfficeAdapter(object : OnMovieItemClickListener {
-            override fun onMovieItemClick(view: View, movie: Any) {
-                showMovieInfoDialog()
+            override fun onMovieItemClick(view: View, movieCode: String) {
+                showMovieInfoDialog(movieCode)
             }
         })
     }
@@ -77,8 +81,33 @@ class MovieFragment : BaseFragment<FragmentMovieBinding>(
         }
     }
 
-    private fun showMovieInfoDialog(movie: ArrayList<Any>) {
-        // TODO Dialog Logic
+    private fun showMovieInfoDialog(movieCode: String) {
+        var movieInfo: MovieInfo? = null
+
+        viewModel.getMovieInfo(movieCode)
+        viewModel.movieInfo.observe(
+            parentActivity
+        ) { response ->
+            response.body().let {
+                movieInfo = it!!.movieInfoResult.movieInfo
+            }
+        }
+
+        val dialogBinding = DialogFragmentMovieMovieInfoBinding
+            .inflate(LayoutInflater.from(parentActivity))
+
+        val dialog = Dialog(parentActivity).apply {
+            setContentView(dialogBinding.root)
+            setCancelable(false)
+            show()
+        }
+
+        with(dialogBinding) {
+            tvDialogFragmentMovieMovieInfoTitle.text = movieInfo?.title
+            tvDialogFragmentMovieMovieInfoAddClose.setOnClickListener {
+                dialog.dismiss()
+            }
+        }
     }
 
     override fun observeEvent() {
