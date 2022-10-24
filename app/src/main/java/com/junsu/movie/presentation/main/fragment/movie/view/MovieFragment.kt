@@ -2,7 +2,6 @@ package com.junsu.movie.presentation.main.fragment.movie.view
 
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.junsu.movie.common.OnMovieItemClickListener
 import com.junsu.movie.data.repository.main.MovieRepository
@@ -27,8 +26,8 @@ class MovieFragment : BaseFragment<FragmentMovieBinding>(
 
     private val dailyBoxOfficeAdapter by lazy {
         DailyBoxOfficeAdapter(object : OnMovieItemClickListener {
-            override fun onMovieItemClick(view: View, movie: Any) {
-                showMovieInfoDialog()
+            override fun onMovieItemClick(view: View, movie: ArrayList<Any>) {
+                showMovieInfoDialog(movie)
             }
         })
     }
@@ -78,7 +77,7 @@ class MovieFragment : BaseFragment<FragmentMovieBinding>(
         }
     }
 
-    private fun showMovieInfoDialog() {
+    private fun showMovieInfoDialog(movie: ArrayList<Any>) {
         // TODO Dialog Logic
     }
 
