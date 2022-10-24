@@ -93,6 +93,11 @@
                         app:layout_constraintTop_toBottomOf="@id/tv_movie_title"
                         tools:listitem="@layout/item_movie" />
                 </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="사용한 API의 제공이 매일 이루어지지 않아서 더미 날짜를 사용하여 API를 받아왔습니다." />
             </LinearLayout>
         </ScrollView>
 

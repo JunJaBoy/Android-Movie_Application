@@ -19,8 +19,8 @@ class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
     private val tag: String = this.javaClass.simpleName
 
     init {
-        /* 주말의 경우 API 제공 안 하는 것으로 추정 */
-        getDailyBoxOffice(getToday())
+        /* 주말의 경우 API 제공 안 하는 것으로 추정, 더미 날짜를 사용하여 제공 */
+        getDailyBoxOffice(/*getToday()*/getDummyDate())
         /* API에서 더이상 지원하지 않는 기능, 이전 날짜로 대체 제공 */
         getWeeklyBoxOffice(getDummyDate())
     }
