@@ -67,7 +67,7 @@ class DailyBoxOfficeAdapter(
                 tvItemMovieAudienceTotal.text = "전체 : ${movie.totalAudienceCount}명"
 
                 root.setOnClickListener {
-                    onMovieItemClickListener.onMovieItemClick(binding.root, movie)
+                    onMovieItemClickListener.onMovieItemClick(binding.root, movie.movieCode)
                 }
             }
         }
