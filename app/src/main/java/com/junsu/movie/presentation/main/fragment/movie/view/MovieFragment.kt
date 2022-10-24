@@ -12,6 +12,7 @@ import com.junsu.movie.data.repository.main.MovieRepository
 import com.junsu.movie.presentation.base.BaseFragment
 import com.junsu.movie.presentation.main.fragment.movie.adapter.DailyBoxOfficeAdapter
 import com.junsu.movie.presentation.main.fragment.movie.adapter.MovieInfoDialogActorsAdapter
+import com.junsu.movie.presentation.main.fragment.movie.adapter.MovieInfoDialogDirectorsAdapter
 import com.junsu.movie.presentation.main.fragment.movie.adapter.WeeklyBoxOfficeAdapter
 import com.junsu.movie.presentation.main.fragment.movie.viewmodel.MovieViewModel
 import com.junsu.movie.presentation.main.fragment.movie.viewmodel.MovieViewModelFactory
@@ -52,6 +53,10 @@ class MovieFragment : BaseFragment<FragmentMovieBinding>(
         MovieInfoDialogActorsAdapter(movieInfo?.actors)
     }
 
+    private val movieInfoDialogDirectorsAdapter by lazy {
+        MovieInfoDialogDirectorsAdapter(movieInfo?.directors)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerViews()
@@ -81,17 +86,29 @@ class MovieFragment : BaseFragment<FragmentMovieBinding>(
             parentActivity
         ) { response ->
             response.body().let {
-
                 movieInfo = it!!.movieInfoResult.movieInfo
 
-                with(dialogBinding) {
-                    dialogBinding.rvDialogFragmentMovieMovieInfoTitleActors.adapter =
-                        movieInfoDialogActorsAdapter
-                    tvDialogFragmentMovieMovieInfoTitle.text = movieInfo?.title
-                    tvDialogFragmentMovieMovieInfoAddClose.setOnClickListener {
-                        dialog.dismiss()
-                    }
-                }
+                initDialogBinding(dialogBinding, dialog)
+            }
+        }
+    }
+
+    private fun initDialogBinding(
+        dialogBinding: DialogFragmentMovieMovieInfoBinding,
+        dialog: Dialog
+    ) {
+        with(dialogBinding) {
+            
+
+            rvDialogFragmentMovieMovieInfoTitleActors.adapter =
+                movieInfoDialogActorsAdapter
+
+            rvDialogFragmentMovieMovieInfoTitleDirectors.adapter =
+                movieInfoDialogDirectorsAdapter
+
+            tvDialogFragmentMovieMovieInfoTitle.text = movieInfo?.title
+            tvDialogFragmentMovieMovieInfoAddClose.setOnClickListener {
+                dialog.dismiss()
             }
         }
     }
