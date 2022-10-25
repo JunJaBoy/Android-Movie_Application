@@ -161,14 +161,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:text="@string/dialog_fragment_movie_movie_info_add_favorite"
-                android:textSize="18sp" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/tv_dialog_fragment_movie_movie_info_add_close"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/dialog_fragment_movie_movie_info_close"
-                android:textSize="18sp" />
+                android:textSize="16sp" />
 
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
