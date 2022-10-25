@@ -1,6 +1,7 @@
 package com.junsu.movie.presentation.main.view
 
 import android.os.Bundle
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.Fragment
 import com.junsu.movie.presentation.base.BaseActivity
 import com.junsu.movie.presentation.main.fragment.movie.view.MovieFragment
@@ -21,6 +22,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        installSplashScreen()
         super.onCreate(savedInstanceState)
 
         changeFragment(movieFragment)
