@@ -1,5 +1,6 @@
 package com.junsu.movie.presentation.main.fragment.movie.view
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -98,6 +99,7 @@ class MovieFragment : BaseFragment<FragmentMovieBinding>(
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun initDialogBinding(
         dialogBinding: DialogFragmentMovieMovieInfoBinding,
         dialog: Dialog
@@ -115,8 +117,14 @@ class MovieFragment : BaseFragment<FragmentMovieBinding>(
                 movieInfoDialogGenresAdapter
 
             tvDialogFragmentMovieMovieInfoTitle.text = movieInfo?.title
+            tvDialogFragmentMovieMovieInfoAudit.text = movieInfo?.audits?.get(0)?.audit
+            tvDialogFragmentMovieMovieInfoRunningTime.text = "${movieInfo?.runningTime}분"
+            tvDialogFragmentMovieMovieInfoReleaseDate.text = movieInfo?.releaseDate
             tvDialogFragmentMovieMovieInfoAddClose.setOnClickListener {
                 dialog.dismiss()
+            }
+            tvDialogFragmentMovieMovieInfoAddFavorite.setOnClickListener {
+                
             }
         }
     }
