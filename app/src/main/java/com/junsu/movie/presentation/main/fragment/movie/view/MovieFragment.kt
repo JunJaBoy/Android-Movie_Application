@@ -124,7 +124,7 @@ class MovieFragment : BaseFragment<FragmentMovieBinding>(
                 dialog.dismiss()
             }
             tvDialogFragmentMovieMovieInfoAddFavorite.setOnClickListener {
-                
+                // TODO Add to Favorite
             }
         }
     }
