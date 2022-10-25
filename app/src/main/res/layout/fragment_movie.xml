@@ -10,109 +10,94 @@
         <ScrollView
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:paddingVertical="32dp"
+            android:scrollbars="none"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/guideline_movie_end"
-            app:layout_constraintStart_toStartOf="@id/guideline_movie_start"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="bottom"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/tv_movie_title"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/bg_movie_title"
-                    android:gravity="start"
+                    android:layout_height="240dp"
+                    android:layout_marginVertical="60dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
                     android:padding="16dp"
                     android:text="@string/movie_title"
-                    android:textColor="@color/white"
-                    android:textSize="48sp" />
+                    android:textSize="52sp"
+                    android:textStyle="bold" />
 
                 <LinearLayout
-                    android:id="@+id/layout_daily_boxOffice"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
-                    android:orientation="vertical">
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_movie_title"
+                    android:orientation="vertical"
+                    android:padding="8dp">
 
-                    <TextView
+                    <LinearLayout
+                        android:id="@+id/layout_daily_boxOffice"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/bg_movie_title"
-                        android:gravity="start"
-                        android:paddingStart="16dp"
-                        android:text="@string/movie_daily_boxOffice"
-                        android:textColor="@color/white"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:layout_marginTop="32dp"
+                        android:orientation="vertical">
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rv_movie_daily"
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="@string/movie_daily_boxOffice"
+                            android:textColor="@color/black"
+                            android:textSize="24sp"
+                            android:textStyle="bold" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rv_movie_daily"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            tools:listitem="@layout/item_movie" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/layout_weekly_boxOffice"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="@id/guideline_movie_end"
-                        app:layout_constraintStart_toStartOf="@id/guideline_movie_start"
-                        app:layout_constraintTop_toBottomOf="@id/tv_movie_title"
-                        tools:listitem="@layout/item_movie" />
+                        android:layout_marginTop="32dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="@string/movie_weekly_boxOffice"
+                            android:textColor="@color/black"
+                            android:textSize="24sp"
+                            android:textStyle="bold" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rv_movie_weekly"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            tools:listitem="@layout/item_movie" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="32dp"
+                            android:text="사용한 API의 제공이 매일 이루어지지 않아서 더미 날짜를 사용하여 API를 받아왔습니다." />
+                    </LinearLayout>
                 </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/layout_weekly_boxOffice"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/bg_movie_title"
-                        android:gravity="start"
-                        android:paddingStart="16dp"
-                        android:text="@string/movie_weekly_boxOffice"
-                        android:textColor="@color/white"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rv_movie_weekly"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="@id/guideline_movie_end"
-                        app:layout_constraintStart_toStartOf="@id/guideline_movie_start"
-                        app:layout_constraintTop_toBottomOf="@id/tv_movie_title"
-                        tools:listitem="@layout/item_movie" />
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="사용한 API의 제공이 매일 이루어지지 않아서 더미 날짜를 사용하여 API를 받아왔습니다." />
             </LinearLayout>
         </ScrollView>
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_movie_start"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.05" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_movie_end"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.95" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
