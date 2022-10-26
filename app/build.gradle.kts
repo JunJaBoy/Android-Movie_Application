@@ -50,7 +50,6 @@ dependencies {
     api("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("androidx.fragment:fragment-ktx:1.5.1")
     implementation("androidx.activity:activity-ktx:1.5.1")
-    implementation("androidx.room:room-compiler:2.4.3")
     implementation("androidx.room:room-ktx:2.4.3")
     testImplementation("junit:junit:4.13.2")
     implementation("androidx.core:core-splashscreen:1.0.0")
