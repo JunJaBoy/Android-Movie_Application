@@ -8,6 +8,8 @@ import android.view.View
 import android.view.WindowManager
 import androidx.lifecycle.ViewModelProvider
 import com.junsu.movie.common.OnMovieItemClickListener
+import com.junsu.movie.common.util.getToday
+import com.junsu.movie.data.model.MovieEntity
 import com.junsu.movie.data.model.MovieInfo
 import com.junsu.movie.data.repository.main.MovieRepository
 import com.junsu.movie.presentation.base.BaseFragment
@@ -124,7 +126,10 @@ class MovieFragment : BaseFragment<FragmentMovieBinding>(
                 dialog.dismiss()
             }
             tvDialogFragmentMovieMovieInfoAddFavorite.setOnClickListener {
-                // TODO Add to Favorite
+                val movieEntity = MovieEntity(movieInfo!!.title, getToday()).also {
+                    println(it)
+                }
+                
             }
         }
     }
