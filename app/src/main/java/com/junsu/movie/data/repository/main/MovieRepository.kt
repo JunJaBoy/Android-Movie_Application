@@ -25,6 +25,6 @@ class MovieRepository {
     }
 
     suspend fun insertMovieInfoIntoFavorite(dataBase: FavoriteMovieDB, movieEntity: MovieEntity) {
-        dataBase!!.movieDAO().insert(movieEntity)
+        dataBase.movieDAO().insert(movieEntity)
     }
 }
