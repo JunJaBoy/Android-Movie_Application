@@ -13,6 +13,7 @@ import com.junsu.movie.data.model.MovieEntity
 import com.junsu.movie.data.model.MovieInfoResponse
 import com.junsu.movie.data.model.WeeklyBoxOfficeResponse
 import com.junsu.movie.data.repository.main.MovieRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
@@ -36,9 +37,7 @@ class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
     private var _movieInfo = MutableLiveData<Response<MovieInfoResponse>>()
     val movieInfo: LiveData<Response<MovieInfoResponse>> = _movieInfo
 
-    private var _insertMovieInfoIntoFavoriteFlag = MutableLiveData<Boolean>().also {
-        it.value = false
-    }
+    private var _insertMovieInfoIntoFavoriteFlag = MutableLiveData<Boolean>()
     val insertMovieInfoIntoFavoriteFlag: LiveData<Boolean> = _insertMovieInfoIntoFavoriteFlag
 
     private fun getDailyBoxOffice(targetDate: String) {
@@ -92,15 +91,15 @@ class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
         }
     }
 
-    private fun insertMovieInfoIntoFavorite(context: Context, movieEntity: MovieEntity) {
-        viewModelScope.launch {
+    internal fun insertMovieInfoIntoFavorite(context: Context, movieEntity: MovieEntity) {
+        viewModelScope.launch(Dispatchers.IO) {
             kotlin.runCatching {
-                val database = FavoriteMovieDB.getInstance(context)
-                database!!.movieDAO().insert(movieEntity)
+                val database = FavoriteMovieDB.getInstance(context)!!
+                repository.insertMovieInfoIntoFavorite(database, movieEntity)
             }.onSuccess {
-                _insertMovieInfoIntoFavoriteFlag.value = true
+                _insertMovieInfoIntoFavoriteFlag.postValue(true)
             }.onFailure {
-                _insertMovieInfoIntoFavoriteFlag.value = false
+                _insertMovieInfoIntoFavoriteFlag.postValue(false)
             }
         }
     }
