@@ -8,6 +8,7 @@ import com.junsu.movie.data.model.MovieEntity
 
 @Database(entities = [MovieEntity::class], version = 1)
 abstract class FavoriteMovieDB : RoomDatabase() {
+
     abstract fun movieDAO(): MovieEntityDAO
 
     companion object {

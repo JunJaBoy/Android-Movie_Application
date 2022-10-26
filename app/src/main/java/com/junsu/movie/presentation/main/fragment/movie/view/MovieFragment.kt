@@ -9,6 +9,7 @@ import android.view.WindowManager
 import androidx.lifecycle.ViewModelProvider
 import com.junsu.movie.common.OnMovieItemClickListener
 import com.junsu.movie.common.util.getToday
+import com.junsu.movie.common.util.showShortToast
 import com.junsu.movie.data.model.MovieEntity
 import com.junsu.movie.data.model.MovieInfo
 import com.junsu.movie.data.repository.main.MovieRepository
@@ -108,7 +109,6 @@ class MovieFragment : BaseFragment<FragmentMovieBinding>(
     ) {
         with(dialogBinding) {
 
-
             rvDialogFragmentMovieMovieInfoTitleActors.adapter =
                 movieInfoDialogActorsAdapter
 
@@ -126,10 +126,11 @@ class MovieFragment : BaseFragment<FragmentMovieBinding>(
                 dialog.dismiss()
             }
             tvDialogFragmentMovieMovieInfoAddFavorite.setOnClickListener {
-                val movieEntity = MovieEntity(movieInfo!!.title, getToday()).also {
+                MovieEntity(movieInfo!!.title, getToday()).also {
                     println(it)
+                    viewModel.insertMovieInfoIntoFavorite(parentActivity, it)
                 }
-                
+
             }
         }
     }
@@ -152,6 +153,16 @@ class MovieFragment : BaseFragment<FragmentMovieBinding>(
                 if (it != null) {
                     weeklyBoxOfficeAdapter.updateMovies(it.boxOfficeResult.weeklyBoxOfficeList)
                 }
+            }
+        }
+
+        viewModel.insertMovieInfoIntoFavoriteFlag.observe(
+            parentActivity
+        ) {
+            if (it) {
+                showShortToast(parentActivity, "즐겨찾기 저장 성공 !")
+            } else {
+                showShortToast(parentActivity, "즐겨찾기 저장 실패 ..")
             }
         }
     }
