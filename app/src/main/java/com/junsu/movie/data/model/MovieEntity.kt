@@ -5,9 +5,9 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "MovieEntity")
 data class MovieEntity(
-    val title: String,
-    val createdAt: String,
+    var title: String,
+    var createdAt: String,
 ) {
     @PrimaryKey(autoGenerate = true)
-    val id = 0
+    var id = 0
 }
