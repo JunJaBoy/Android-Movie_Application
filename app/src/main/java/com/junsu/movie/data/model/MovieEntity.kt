@@ -1,11 +1,13 @@
 package com.junsu.movie.data.model
 
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 
 @Entity(tableName = "MovieEntity")
 data class MovieEntity(
-    var movieInfo: MovieInfo,
-    var createdAt: String,
+    val title: String,
+    val createdAt: String,
 ) {
-    var id = 0
+    @PrimaryKey(autoGenerate = true)
+    val id = 0
 }
