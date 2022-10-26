@@ -29,3 +29,5 @@ abstract class FavoriteMovieDB : RoomDatabase() {
         }
     }
 }
+
+fun getFavoriteMovieDB(context: Context): FavoriteMovieDB = FavoriteMovieDB.getInstance(context)!!
