@@ -11,4 +11,5 @@
     <string name="dialog_fragment_movie_movie_info_add_favorite">즐겨찾기 추가</string>
     <string name="dialog_fragment_movie_movie_info_close">닫기</string>
     <string name="mypage_favorites">Favorites</string>
+    <string name="my_page_btn_favorite_delete">MyPage Favorite Movie Deletion Button</string>
 </resources>
