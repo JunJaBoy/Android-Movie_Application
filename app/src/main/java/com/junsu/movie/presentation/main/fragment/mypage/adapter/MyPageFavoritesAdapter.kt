@@ -37,12 +37,12 @@ class MyPageFavoritesAdapter(private var favoriteMovies: ArrayList<MovieEntity>)
     inner class MyPageFavoritesViewHolder(private val binding: ItemMypageFavoriteBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
+        @SuppressLint("SetTextI18n")
         fun bind(favoriteMovie: MovieEntity) {
-
             with(binding) {
 
                 tvMypageItemTitle.text = favoriteMovie.title
-                tvMypageItemCreatedAt.text = favoriteMovie.createdAt
+                tvMypageItemCreatedAt.text = "Created At ${favoriteMovie.createdAt}"
             }
         }
     }
