@@ -27,7 +27,7 @@ class MovieInfoDialogGenresAdapter(
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun updateActors(genres: ArrayList<MovieGenre>) {
+    fun updateGenres(genres: ArrayList<MovieGenre>) {
         this.genres = genres
         notifyDataSetChanged()
     }

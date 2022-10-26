@@ -91,8 +91,8 @@ class MovieFragment : BaseFragment<FragmentMovieBinding>(
                 movieInfo = it!!.movieInfoResult.movieInfo
 
                 movieInfoDialogActorsAdapter.updateActors(movieInfo!!.actors)
-                movieInfoDialogDirectorsAdapter.updateActors(movieInfo!!.directors)
-                movieInfoDialogGenresAdapter.updateActors(movieInfo!!.genres)
+                movieInfoDialogDirectorsAdapter.updateDirectors(movieInfo!!.directors)
+                movieInfoDialogGenresAdapter.updateGenres(movieInfo!!.genres)
 
                 initDialogBinding(dialogBinding, dialog)
             }
@@ -116,10 +116,10 @@ class MovieFragment : BaseFragment<FragmentMovieBinding>(
             rvDialogFragmentMovieMovieInfoTitleGenres.adapter =
                 movieInfoDialogGenresAdapter
 
-            tvDialogFragmentMovieMovieInfoTitle.text = movieInfo?.title
-            tvDialogFragmentMovieMovieInfoAudit.text = movieInfo?.audits?.get(0)?.audit
-            tvDialogFragmentMovieMovieInfoRunningTime.text = "${movieInfo?.runningTime}분"
-            tvDialogFragmentMovieMovieInfoReleaseDate.text = movieInfo?.releaseDate
+            tvDialogFragmentMovieMovieInfoTitle.text = movieInfo!!.title
+            tvDialogFragmentMovieMovieInfoAudit.text = movieInfo!!.audits[0].audit
+            tvDialogFragmentMovieMovieInfoRunningTime.text = "${movieInfo!!.runningTime}분"
+            tvDialogFragmentMovieMovieInfoReleaseDate.text = movieInfo!!.releaseDate
             tvDialogFragmentMovieMovieInfoAddClose.setOnClickListener {
                 dialog.dismiss()
             }
