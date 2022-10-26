@@ -15,7 +15,7 @@ class MyPageViewModel(private val myPageRepository: MyPageRepository) : ViewMode
             kotlin.runCatching {
                 myPageRepository.getAllFavoriteMovies(getFavoriteMovieDB(context))
             }.onSuccess {
-                
+                TODO()
             }
         }
     }
