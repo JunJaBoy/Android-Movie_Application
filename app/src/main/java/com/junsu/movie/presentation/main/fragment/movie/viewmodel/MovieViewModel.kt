@@ -1,13 +1,15 @@
 package com.junsu.movie.presentation.main.fragment.movie.viewmodel
 
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.junsu.movie.common.util.getDummyDate
-import com.junsu.movie.common.util.getToday
+import com.junsu.movie.data.local.FavoriteMovieDB
 import com.junsu.movie.data.model.DailyBoxOfficeResponse
+import com.junsu.movie.data.model.MovieEntity
 import com.junsu.movie.data.model.MovieInfoResponse
 import com.junsu.movie.data.model.WeeklyBoxOfficeResponse
 import com.junsu.movie.data.repository.main.MovieRepository
@@ -33,6 +35,11 @@ class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
 
     private var _movieInfo = MutableLiveData<Response<MovieInfoResponse>>()
     val movieInfo: LiveData<Response<MovieInfoResponse>> = _movieInfo
+
+    private var _insertMovieInfoIntoFavoriteFlag = MutableLiveData<Boolean>().also {
+        it.value = false
+    }
+    val insertMovieInfoIntoFavoriteFlag: LiveData<Boolean> = _insertMovieInfoIntoFavoriteFlag
 
     private fun getDailyBoxOffice(targetDate: String) {
         viewModelScope.launch {
@@ -82,6 +89,19 @@ class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
                 .onFailure {
                     Log.e(tag, "getMovieInfo error", it)
                 }
+        }
+    }
+
+    private fun insertMovieInfoIntoFavorite(context: Context, movieEntity: MovieEntity) {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                val database = FavoriteMovieDB.getInstance(context)
+                database!!.movieDAO().insert(movieEntity)
+            }.onSuccess {
+                _insertMovieInfoIntoFavoriteFlag.value = true
+            }.onFailure {
+                _insertMovieInfoIntoFavoriteFlag.value = false
+            }
         }
     }
 }
