@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.junsu.movie.common.util.getDummyDate
-import com.junsu.movie.data.local.FavoriteMovieDB
+import com.junsu.movie.data.local.getFavoriteMovieDB
 import com.junsu.movie.data.model.DailyBoxOfficeResponse
 import com.junsu.movie.data.model.MovieEntity
 import com.junsu.movie.data.model.MovieInfoResponse
@@ -17,7 +17,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
-class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
+class MovieViewModel(private val movieRepository: MovieRepository) : ViewModel() {
 
     private val tag: String = this.javaClass.simpleName
 
@@ -42,7 +42,7 @@ class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
 
     private fun getDailyBoxOffice(targetDate: String) {
         viewModelScope.launch {
-            kotlin.runCatching { repository.getDailyBoxOffice(targetDate) }
+            kotlin.runCatching { movieRepository.getDailyBoxOffice(targetDate) }
                 .onSuccess {
                     if (it.isSuccessful) {
                         _dailyBoxOfficeMovies.value = it
@@ -59,7 +59,7 @@ class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
 
     private fun getWeeklyBoxOffice(targetDate: String) {
         viewModelScope.launch {
-            kotlin.runCatching { repository.getWeeklyBoxOffice(targetDate) }
+            kotlin.runCatching { movieRepository.getWeeklyBoxOffice(targetDate) }
                 .onSuccess {
                     if (it.isSuccessful) {
                         _weeklyBoxOfficeMovies.value = it
@@ -76,7 +76,7 @@ class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
 
     internal fun getMovieInfo(movieCode: String) {
         viewModelScope.launch {
-            kotlin.runCatching { repository.getMovieInfo(movieCode) }
+            kotlin.runCatching { movieRepository.getMovieInfo(movieCode) }
                 .onSuccess {
                     if (it.isSuccessful) {
                         _movieInfo.value = it
@@ -94,8 +94,7 @@ class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
     internal fun insertMovieInfoIntoFavorite(context: Context, movieEntity: MovieEntity) {
         viewModelScope.launch(Dispatchers.IO) {
             kotlin.runCatching {
-                val database = FavoriteMovieDB.getInstance(context)!!
-                repository.insertMovieInfoIntoFavorite(database, movieEntity)
+                movieRepository.insertMovieInfoIntoFavorite(getFavoriteMovieDB(context), movieEntity)
             }.onSuccess {
                 _insertMovieInfoIntoFavoriteFlag.postValue(true)
             }.onFailure {
