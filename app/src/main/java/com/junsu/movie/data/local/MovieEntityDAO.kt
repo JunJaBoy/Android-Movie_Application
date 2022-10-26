@@ -9,11 +9,11 @@ import com.junsu.movie.data.model.MovieEntity
 @Dao
 interface MovieEntityDAO {
     @Insert
-    fun insert(movieEntity: MovieEntity)
+    suspend fun insert(movieEntity: MovieEntity)
 
     @Delete
-    fun delete(movieEntity: MovieEntity)
+    suspend fun delete(movieEntity: MovieEntity)
 
     @Query("SELECT * FROM MovieEntity")
-    fun getAll(): List<MovieEntity>
+    suspend fun getAll(): ArrayList<MovieEntity>
 }
