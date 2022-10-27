@@ -94,7 +94,7 @@ class MovieViewModel(private val movieRepository: MovieRepository) : ViewModel()
         viewModelScope.launch(Dispatchers.IO) {
             kotlin.runCatching {
                 movieRepository.insertMovieInfoIntoFavorite(movieEntity)
-            }.onSuccess {
+                println("Inserting value : $movieEntity")
                 _insertMovieInfoIntoFavoriteFlag.postValue(true)
             }.onFailure {
                 _insertMovieInfoIntoFavoriteFlag.postValue(false)
