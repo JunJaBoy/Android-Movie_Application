@@ -7,7 +7,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.junsu.movie.common.util.getDummyDate
-import com.junsu.movie.data.local.getFavoriteMovieDB
 import com.junsu.movie.data.model.DailyBoxOfficeResponse
 import com.junsu.movie.data.model.MovieEntity
 import com.junsu.movie.data.model.MovieInfoResponse
@@ -91,10 +90,10 @@ class MovieViewModel(private val movieRepository: MovieRepository) : ViewModel()
         }
     }
 
-    internal fun insertMovieInfoIntoFavorite(context: Context, movieEntity: MovieEntity) {
+    internal fun insertMovieInfoIntoFavorite(movieEntity: MovieEntity) {
         viewModelScope.launch(Dispatchers.IO) {
             kotlin.runCatching {
-                movieRepository.insertMovieInfoIntoFavorite(getFavoriteMovieDB(context), movieEntity)
+                movieRepository.insertMovieInfoIntoFavorite(movieEntity)
             }.onSuccess {
                 _insertMovieInfoIntoFavoriteFlag.postValue(true)
             }.onFailure {
