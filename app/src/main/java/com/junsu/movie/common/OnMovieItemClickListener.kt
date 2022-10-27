@@ -1,11 +1,12 @@
 package com.junsu.movie.common
 
 import android.view.View
+import com.junsu.movie.data.model.MovieEntity
 
 interface OnMovieItemClickListener {
-    fun onMovieItemClick(view: View, movieCode: String)
+    fun onMovieItemClick(movieCode: String)
 }
 
 interface OnFavoriteItemClickListener {
-    fun onDeleteFavoriteItemClick(view: View)
+    fun onDeleteFavoriteItemClick(movieEntity: MovieEntity)
 }
