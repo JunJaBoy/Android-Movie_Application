@@ -12,23 +12,24 @@ abstract class FavoriteMovieDB : RoomDatabase() {
     abstract fun movieDAO(): MovieEntityDAO
 
     companion object {
+
         private var instance: FavoriteMovieDB? = null
 
         @Synchronized
         fun getInstance(context: Context): FavoriteMovieDB? {
-            if (instance == null) {
-                synchronized(FavoriteMovieDB::class) {
-                    instance = Room.databaseBuilder(
-                        context.applicationContext,
-                        FavoriteMovieDB::class.java,
-                        "database"
-                    ).build()
+            return instance ?: synchronized(this) {
+                val instance = Room.databaseBuilder(
+                    context.applicationContext,
+                    FavoriteMovieDB::class.java,
+                    "favoriteMovieDatabase"
+                ).build()
+
+                instance.also {
+                    this.instance = it
                 }
             }
-            return instance
         }
     }
 }
 
 var favoriteMovieDB: FavoriteMovieDB? = null
-fun getFavoriteMovieDB(context: Context): FavoriteMovieDB = FavoriteMovieDB.getInstance(context)!!
