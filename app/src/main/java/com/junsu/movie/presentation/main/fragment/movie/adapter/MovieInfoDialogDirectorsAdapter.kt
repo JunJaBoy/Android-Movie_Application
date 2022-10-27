@@ -27,7 +27,7 @@ class MovieInfoDialogDirectorsAdapter(
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun updateActors(directors: ArrayList<MovieDirector>) {
+    fun updateDirectors(directors: ArrayList<MovieDirector>) {
         this.directors = directors
         notifyDataSetChanged()
     }

@@ -11,7 +11,7 @@ import com.junsu.movieapplication.databinding.ItemMovieBinding
 
 class DailyBoxOfficeAdapter(
     private val onMovieItemClickListener: OnMovieItemClickListener,
-    private var movies: ArrayList<DailyBoxOfficeList>? = arrayListOf()
+    private var movies: ArrayList<DailyBoxOfficeList>? = arrayListOf(),
 ) :
     RecyclerView.Adapter<DailyBoxOfficeAdapter.DailyBoxOfficeViewHolder>() {
 
@@ -67,7 +67,7 @@ class DailyBoxOfficeAdapter(
                 tvItemMovieAudienceTotal.text = "전체 : ${movie.totalAudienceCount}명"
 
                 root.setOnClickListener {
-                    onMovieItemClickListener.onMovieItemClick(binding.root, movie.movieCode)
+                    onMovieItemClickListener.onMovieItemClick(movie.movieCode)
                 }
             }
         }
