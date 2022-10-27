@@ -11,7 +11,7 @@ import com.junsu.movieapplication.databinding.ItemMovieBinding
 
 class DailyBoxOfficeAdapter(
     private val onMovieItemClickListener: OnMovieItemClickListener,
-    private var movies: ArrayList<DailyBoxOfficeList>? = arrayListOf()
+    private var movies: ArrayList<DailyBoxOfficeList>? = arrayListOf(),
 ) :
     RecyclerView.Adapter<DailyBoxOfficeAdapter.DailyBoxOfficeViewHolder>() {
 
