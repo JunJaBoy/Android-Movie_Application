@@ -4,10 +4,14 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.junsu.movie.common.OnFavoriteItemClickListener
 import com.junsu.movie.data.model.MovieEntity
 import com.junsu.movieapplication.databinding.ItemMypageFavoriteBinding
 
-class MyPageFavoritesAdapter(private var favoriteMovies: ArrayList<MovieEntity>) :
+class MyPageFavoritesAdapter(
+    private val onFavoriteItemClickListener: OnFavoriteItemClickListener,
+    private var favoriteMovies: ArrayList<MovieEntity>? = arrayListOf(),
+) :
     RecyclerView.Adapter<MyPageFavoritesAdapter.MyPageFavoritesViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyPageFavoritesViewHolder {
@@ -21,11 +25,11 @@ class MyPageFavoritesAdapter(private var favoriteMovies: ArrayList<MovieEntity>)
     }
 
     override fun onBindViewHolder(holder: MyPageFavoritesViewHolder, position: Int) {
-        holder.bind(favoriteMovies[position])
+        holder.bind(favoriteMovies!![position])
     }
 
     override fun getItemCount(): Int {
-        return favoriteMovies.size
+        return favoriteMovies!!.size
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -43,6 +47,9 @@ class MyPageFavoritesAdapter(private var favoriteMovies: ArrayList<MovieEntity>)
 
                 tvMypageItemTitle.text = favoriteMovie.title
                 tvMypageItemCreatedAt.text = "Created At ${favoriteMovie.createdAt}"
+                btnMypageItemDeleteFavorite.setOnClickListener {
+                    onFavoriteItemClickListener.onDeleteFavoriteItemClick(binding.btnMypageItemDeleteFavorite)
+                }
             }
         }
     }
