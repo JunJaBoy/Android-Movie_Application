@@ -128,7 +128,7 @@ class MovieFragment : BaseFragment<FragmentMovieBinding>(
             tvDialogFragmentMovieMovieInfoAddFavorite.setOnClickListener {
                 MovieEntity(movieInfo!!.title, getToday()).also {
                     println(it)
-                    viewModel.insertMovieInfoIntoFavorite(parentActivity, it)
+                    viewModel.insertMovieInfoIntoFavorite(it)
                 }
 
             }
