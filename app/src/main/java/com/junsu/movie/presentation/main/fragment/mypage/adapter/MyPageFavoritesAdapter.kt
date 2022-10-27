@@ -42,12 +42,12 @@ class MyPageFavoritesAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         @SuppressLint("SetTextI18n")
-        fun bind(favoriteMovie: MovieEntity) {
+        fun bind(movieEntity: MovieEntity) {
             with(binding) {
-                tvMypageItemTitle.text = favoriteMovie.title
-                tvMypageItemCreatedAt.text = "Created At ${favoriteMovie.createdAt}"
+                tvMypageItemTitle.text = movieEntity.title
+                tvMypageItemCreatedAt.text = "Created At ${movieEntity.createdAt}"
                 btnMypageItemDeleteFavorite.setOnClickListener {
-                    onFavoriteItemClickListener.onDeleteFavoriteItemClick(binding.btnMypageItemDeleteFavorite)
+                    onFavoriteItemClickListener.onDeleteFavoriteItemClick(movieEntity)
                 }
             }
         }
