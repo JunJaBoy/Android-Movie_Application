@@ -22,20 +22,20 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(
 
     private val viewModel by lazy {
         ViewModelProvider(
-            this, MyPageViewModelFactory(MyPageRepository())
+            requireActivity(), MyPageViewModelFactory(MyPageRepository())
         )[MyPageViewModel::class.java]
     }
 
     private val myPageFavoritesAdapter by lazy {
         MyPageFavoritesAdapter(object : OnFavoriteItemClickListener {
-            override fun onDeleteFavoriteItemClick(view: View) {
-                showDeleteFavoriteDialog()
+            override fun onDeleteFavoriteItemClick(movieEntity: MovieEntity) {
+                showDeleteFavoriteDialog(movieEntity)
             }
         })
     }
 
-    private fun showDeleteFavoriteDialog() {
-        val dialog = AlertDialog.Builder(parentActivity).apply {
+    private fun showDeleteFavoriteDialog(movieEntity: MovieEntity) {
+        val dialog = AlertDialog.Builder(requireActivity()).apply {
             setTitle(getString(R.string.my_page_fragment_sure_you_delete))
             setCancelable(false)
         }
@@ -44,7 +44,7 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(
                 setPositiveButton(
                     getString(R.string.accept)
                 ) { _, _ ->
-                    deleteFavoriteMovie()
+                    deleteFavoriteMovie(movieEntity)
                 }
                 setNeutralButton(
                     getString(R.string.cancel)
@@ -57,7 +57,8 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(
     }
 
     // TODO 잘 옮기기
-    private fun deleteFavoriteMovie() {
+    private fun deleteFavoriteMovie(movieEntity: MovieEntity) {
+        viewModel.deleteFavoriteMovie(movieEntity)
     }
 
     private fun initRecyclerView() {
@@ -72,10 +73,10 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(
 
     override fun observeEvent() {
         viewModel.favoriteMovies.observe(
-            parentActivity
+            requireActivity()
         ) {
             favoriteMovies = it
-            println(it)
+            println("Favorite movies : $it")
             myPageFavoritesAdapter.updateFavoriteMovies(it)
         }
     }
