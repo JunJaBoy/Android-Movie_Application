@@ -1,21 +1,31 @@
 package com.junsu.movie.presentation.main.fragment.mypage.viewmodel
 
 import MyPageRepository
-import android.content.Context
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.junsu.movie.data.local.getFavoriteMovieDB
+import com.junsu.movie.data.model.MovieEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MyPageViewModel(private val myPageRepository: MyPageRepository) : ViewModel() {
 
-    suspend fun getAllFavoriteMovies(context: Context) {
+    private val tag: String = this.javaClass.simpleName
+
+    init {
+        getAllFavoriteMovies()
+    }
+
+    private var _favoriteMovies = MutableLiveData<ArrayList<MovieEntity>>()
+    val favoriteMovies: LiveData<ArrayList<MovieEntity>> = _favoriteMovies
+
+    internal fun getAllFavoriteMovies() {
         viewModelScope.launch(Dispatchers.IO) {
             kotlin.runCatching {
-                myPageRepository.getAllFavoriteMovies(getFavoriteMovieDB(context))
+                myPageRepository.getAllFavoriteMovies()
             }.onSuccess {
-                TODO()
+                _favoriteMovies.postValue(it)
             }
         }
     }
