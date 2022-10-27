@@ -4,6 +4,6 @@ import com.junsu.movie.data.model.MovieEntity
 class MyPageRepository {
 
     suspend fun getAllFavoriteMovies(dataBase: FavoriteMovieDB): ArrayList<MovieEntity> {
-        return dataBase.movieDAO().getAll()
+        return dataBase.movieDAO().getAll() as ArrayList<MovieEntity>
     }
 }
