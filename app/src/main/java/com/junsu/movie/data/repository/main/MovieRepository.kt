@@ -4,6 +4,7 @@ import com.junsu.movie.data.api.RetrofitClient.API_KEY
 import com.junsu.movie.data.api.boxOfficeApiService
 import com.junsu.movie.data.api.movieApiService
 import com.junsu.movie.data.local.FavoriteMovieDB
+import com.junsu.movie.data.local.favoriteMovieDB
 import com.junsu.movie.data.model.DailyBoxOfficeResponse
 import com.junsu.movie.data.model.MovieEntity
 import com.junsu.movie.data.model.MovieInfoResponse
@@ -24,7 +25,7 @@ class MovieRepository {
         return movieApiService.getMovieInfo(API_KEY, movieCode)
     }
 
-    suspend fun insertMovieInfoIntoFavorite(dataBase: FavoriteMovieDB, movieEntity: MovieEntity) {
-        dataBase.movieDAO().insert(movieEntity)
+    suspend fun insertMovieInfoIntoFavorite(movieEntity: MovieEntity) {
+        favoriteMovieDB!!.movieDAO().insert(movieEntity)
     }
 }
