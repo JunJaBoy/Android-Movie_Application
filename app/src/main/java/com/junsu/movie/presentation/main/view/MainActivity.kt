@@ -35,14 +35,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
                 when (it.itemId) {
                     R.id.menu_bn_main_movie -> {
                         changeFragment(movieFragment)
-                        return@setOnItemSelectedListener true
+                        true
                     }
                     R.id.menu_bn_main_myPage -> {
                         changeFragment(myPageFragment)
-                        return@setOnItemSelectedListener true
+                        true
                     }
+                    else -> false
                 }
-                false
             }
             selectedItemId = R.id.menu_bn_main_movie
         }
