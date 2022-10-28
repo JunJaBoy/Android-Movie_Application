@@ -43,9 +43,12 @@ class MyPageFavoritesAdapter(
 
         @SuppressLint("SetTextI18n")
         fun bind(movieEntity: MovieEntity) {
+
             with(binding) {
+
                 tvMypageItemTitle.text = movieEntity.title
                 tvMypageItemCreatedAt.text = "Created At ${movieEntity.createdAt}"
+
                 btnMypageItemDeleteFavorite.setOnClickListener {
                     onFavoriteItemClickListener.onDeleteFavoriteItemClick(movieEntity)
                 }
