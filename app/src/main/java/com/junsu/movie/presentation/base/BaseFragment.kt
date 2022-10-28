@@ -1,12 +1,10 @@
 package com.junsu.movie.presentation.base
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
@@ -15,20 +13,10 @@ abstract class BaseFragment<B : ViewDataBinding>(
     @LayoutRes private val layoutRes: Int,
 ) : Fragment() {
 
-    protected lateinit var parentActivity: AppCompatActivity
-
     protected lateinit var binding: B
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-
-        parentActivity = context as AppCompatActivity
-    }
-
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
 
         binding = DataBindingUtil.inflate(inflater, layoutRes, container, false)

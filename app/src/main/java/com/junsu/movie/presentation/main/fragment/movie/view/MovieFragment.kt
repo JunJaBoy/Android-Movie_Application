@@ -8,6 +8,8 @@ import android.view.View
 import android.view.WindowManager
 import androidx.lifecycle.ViewModelProvider
 import com.junsu.movie.common.OnMovieItemClickListener
+import com.junsu.movie.common.util.getToday
+import com.junsu.movie.data.model.MovieEntity
 import com.junsu.movie.data.model.MovieInfo
 import com.junsu.movie.data.repository.main.MovieRepository
 import com.junsu.movie.presentation.base.BaseFragment
@@ -26,14 +28,14 @@ class MovieFragment : BaseFragment<FragmentMovieBinding>(
 
     private val viewModel by lazy {
         ViewModelProvider(
-            this,
+            requireActivity(),
             MovieViewModelFactory(MovieRepository())
         )[MovieViewModel::class.java]
     }
 
     private val dailyBoxOfficeAdapter by lazy {
         DailyBoxOfficeAdapter(object : OnMovieItemClickListener {
-            override fun onMovieItemClick(view: View, movieCode: String) {
+            override fun onMovieItemClick(movieCode: String) {
                 showMovieInfoDialog(movieCode)
             }
         })
@@ -41,7 +43,7 @@ class MovieFragment : BaseFragment<FragmentMovieBinding>(
 
     private val weeklyBoxOfficeAdapter by lazy {
         WeeklyBoxOfficeAdapter(object : OnMovieItemClickListener {
-            override fun onMovieItemClick(view: View, movieCode: String) {
+            override fun onMovieItemClick(movieCode: String) {
                 showMovieInfoDialog(movieCode)
             }
         })
@@ -71,9 +73,9 @@ class MovieFragment : BaseFragment<FragmentMovieBinding>(
 
     private fun showMovieInfoDialog(movieCode: String) {
         val dialogBinding = DialogFragmentMovieMovieInfoBinding
-            .inflate(LayoutInflater.from(parentActivity))
+            .inflate(LayoutInflater.from(requireActivity()))
 
-        val dialog = Dialog(parentActivity).apply {
+        val dialog = Dialog(requireActivity()).apply {
             setContentView(dialogBinding.root)
             setCancelable(false)
             window!!.attributes.apply {
@@ -85,14 +87,14 @@ class MovieFragment : BaseFragment<FragmentMovieBinding>(
 
         viewModel.getMovieInfo(movieCode)
         viewModel.movieInfo.observe(
-            parentActivity
+            requireActivity()
         ) { response ->
             response.body().let {
                 movieInfo = it!!.movieInfoResult.movieInfo
 
                 movieInfoDialogActorsAdapter.updateActors(movieInfo!!.actors)
-                movieInfoDialogDirectorsAdapter.updateActors(movieInfo!!.directors)
-                movieInfoDialogGenresAdapter.updateActors(movieInfo!!.genres)
+                movieInfoDialogDirectorsAdapter.updateDirectors(movieInfo!!.directors)
+                movieInfoDialogGenresAdapter.updateGenres(movieInfo!!.genres)
 
                 initDialogBinding(dialogBinding, dialog)
             }
@@ -106,7 +108,6 @@ class MovieFragment : BaseFragment<FragmentMovieBinding>(
     ) {
         with(dialogBinding) {
 
-
             rvDialogFragmentMovieMovieInfoTitleActors.adapter =
                 movieInfoDialogActorsAdapter
 
@@ -116,22 +117,26 @@ class MovieFragment : BaseFragment<FragmentMovieBinding>(
             rvDialogFragmentMovieMovieInfoTitleGenres.adapter =
                 movieInfoDialogGenresAdapter
 
-            tvDialogFragmentMovieMovieInfoTitle.text = movieInfo?.title
-            tvDialogFragmentMovieMovieInfoAudit.text = movieInfo?.audits?.get(0)?.audit
-            tvDialogFragmentMovieMovieInfoRunningTime.text = "${movieInfo?.runningTime}분"
-            tvDialogFragmentMovieMovieInfoReleaseDate.text = movieInfo?.releaseDate
+            tvDialogFragmentMovieMovieInfoTitle.text = movieInfo!!.title
+            tvDialogFragmentMovieMovieInfoAudit.text = movieInfo!!.audits[0].audit
+            tvDialogFragmentMovieMovieInfoRunningTime.text = "${movieInfo!!.runningTime}분"
+            tvDialogFragmentMovieMovieInfoReleaseDate.text = movieInfo!!.releaseDate
             tvDialogFragmentMovieMovieInfoAddClose.setOnClickListener {
                 dialog.dismiss()
             }
             tvDialogFragmentMovieMovieInfoAddFavorite.setOnClickListener {
-                // TODO Add to Favorite
+                MovieEntity(movieInfo!!.title, getToday()).also {
+                    println("Selected movie info : $it")
+                    viewModel.insertMovieInfoIntoFavorite(it)
+                }
+                dialog.cancel()
             }
         }
     }
 
     override fun observeEvent() {
         viewModel.dailyBoxOfficeMovies.observe(
-            parentActivity
+            requireActivity()
         ) { response ->
             response.body().let {
                 if (it != null) {
@@ -141,7 +146,7 @@ class MovieFragment : BaseFragment<FragmentMovieBinding>(
         }
 
         viewModel.weeklyBoxOfficeMovies.observe(
-            parentActivity
+            requireActivity()
         ) { response ->
             response.body().let {
                 if (it != null) {
