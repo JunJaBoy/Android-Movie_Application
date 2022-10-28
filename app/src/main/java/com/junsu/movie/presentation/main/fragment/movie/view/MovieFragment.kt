@@ -127,15 +127,11 @@ class MovieFragment : BaseFragment<FragmentMovieBinding>(
             tvDialogFragmentMovieMovieInfoAddFavorite.setOnClickListener {
                 MovieEntity(movieInfo!!.title, getToday()).also {
                     println("Selected movie info : $it")
-                    insertMovieIntoFavorite(it)
+                    viewModel.insertMovieInfoIntoFavorite(it)
                 }
                 dialog.cancel()
             }
         }
-    }
-
-    private fun insertMovieIntoFavorite(movieEntity: MovieEntity) {
-        viewModel.insertMovieInfoIntoFavorite(movieEntity)
     }
 
     override fun observeEvent() {

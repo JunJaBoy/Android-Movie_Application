@@ -35,11 +35,9 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(
     }
 
     private fun showDeleteFavoriteDialog(movieEntity: MovieEntity) {
-        val dialog = AlertDialog.Builder(requireActivity()).apply {
+        AlertDialog.Builder(requireActivity()).apply {
             setTitle(getString(R.string.my_page_fragment_sure_you_delete))
             setCancelable(false)
-        }
-        with(dialog) {
             create().apply {
                 setPositiveButton(
                     getString(R.string.accept)
@@ -52,8 +50,7 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(
                     dismiss()
                 }
             }
-            show()
-        }
+        }.show()
     }
 
     // TODO 잘 옮기기
