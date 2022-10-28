@@ -1,6 +1,6 @@
 package com.junsu.movie.presentation.main.fragment.mypage.viewmodel
 
-import MyPageRepository
+import com.junsu.movie.data.repository.main.MyPageRepository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,8 +10,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MyPageViewModel(private val myPageRepository: MyPageRepository) : ViewModel() {
-
-    private val tag: String = this.javaClass.simpleName
 
     private var _favoriteMovies = MutableLiveData<ArrayList<MovieEntity>>()
     val favoriteMovies: LiveData<ArrayList<MovieEntity>> = _favoriteMovies

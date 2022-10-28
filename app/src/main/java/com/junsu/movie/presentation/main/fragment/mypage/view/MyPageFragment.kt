@@ -1,6 +1,6 @@
 package com.junsu.movie.presentation.main.fragment.mypage.view
 
-import MyPageRepository
+import com.junsu.movie.data.repository.main.MyPageRepository
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -60,10 +60,6 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(
         viewModel.deleteFavoriteMovie(movieEntity)
     }
 
-    private fun initRecyclerView() {
-        binding.rvMypageDaily.adapter = myPageFavoritesAdapter
-    }
-    
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
@@ -76,7 +72,10 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
+    }
 
+    private fun initRecyclerView() {
+        binding.rvMypageDaily.adapter = myPageFavoritesAdapter
     }
 
     override fun observeEvent() {

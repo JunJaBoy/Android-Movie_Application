@@ -16,15 +16,13 @@ abstract class FavoriteMovieDB : RoomDatabase() {
         private var instance: FavoriteMovieDB? = null
 
         @Synchronized
-        fun getInstance(context: Context): FavoriteMovieDB? {
+        fun getInstance(context: Context): FavoriteMovieDB {
             return instance ?: synchronized(this) {
-                val instance = Room.databaseBuilder(
+                Room.databaseBuilder(
                     context.applicationContext,
                     FavoriteMovieDB::class.java,
-                    "favoriteMovieDatabase"
-                ).build()
-
-                instance.also {
+                    "favoriteMovieDB"
+                ).build().also {
                     this.instance = it
                 }
             }

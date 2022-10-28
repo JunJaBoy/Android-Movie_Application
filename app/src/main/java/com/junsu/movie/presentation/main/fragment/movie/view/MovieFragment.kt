@@ -24,7 +24,7 @@ class MovieFragment : BaseFragment<FragmentMovieBinding>(
     R.layout.fragment_movie
 ) {
 
-    var movieInfo: MovieInfo? = null
+    private var movieInfo: MovieInfo? = null
 
     private val viewModel by lazy {
         ViewModelProvider(
@@ -49,6 +49,7 @@ class MovieFragment : BaseFragment<FragmentMovieBinding>(
         })
     }
 
+    // TODO Should remove all adapter params
     private val movieInfoDialogActorsAdapter by lazy {
         MovieInfoDialogActorsAdapter(movieInfo?.actors)
     }
@@ -86,17 +87,19 @@ class MovieFragment : BaseFragment<FragmentMovieBinding>(
         }
 
         viewModel.getMovieInfo(movieCode)
+
         viewModel.movieInfo.observe(
             requireActivity()
         ) { response ->
             response.body().let {
                 movieInfo = it!!.movieInfoResult.movieInfo
 
+                initDialogBinding(dialogBinding, dialog)
+
                 movieInfoDialogActorsAdapter.updateActors(movieInfo!!.actors)
                 movieInfoDialogDirectorsAdapter.updateDirectors(movieInfo!!.directors)
                 movieInfoDialogGenresAdapter.updateGenres(movieInfo!!.genres)
 
-                initDialogBinding(dialogBinding, dialog)
             }
         }
     }

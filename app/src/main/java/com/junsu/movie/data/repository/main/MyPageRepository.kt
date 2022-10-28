@@ -1,3 +1,5 @@
+package com.junsu.movie.data.repository.main
+
 import androidx.annotation.WorkerThread
 import com.junsu.movie.data.local.favoriteMovieDB
 import com.junsu.movie.data.model.MovieEntity
