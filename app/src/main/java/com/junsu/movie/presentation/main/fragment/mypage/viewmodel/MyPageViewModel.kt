@@ -1,6 +1,6 @@
 package com.junsu.movie.presentation.main.fragment.mypage.viewmodel
 
-import MyPageRepository
+import com.junsu.movie.data.repository.main.MyPageRepository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
