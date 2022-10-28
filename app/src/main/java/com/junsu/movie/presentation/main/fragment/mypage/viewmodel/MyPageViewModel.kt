@@ -11,8 +11,6 @@ import kotlinx.coroutines.launch
 
 class MyPageViewModel(private val myPageRepository: MyPageRepository) : ViewModel() {
 
-    private val tag: String = this.javaClass.simpleName
-
     private var _favoriteMovies = MutableLiveData<ArrayList<MovieEntity>>()
     val favoriteMovies: LiveData<ArrayList<MovieEntity>> = _favoriteMovies
 
