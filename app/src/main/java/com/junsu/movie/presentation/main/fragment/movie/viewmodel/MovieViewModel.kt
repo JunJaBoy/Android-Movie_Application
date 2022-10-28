@@ -1,6 +1,5 @@
 package com.junsu.movie.presentation.main.fragment.movie.viewmodel
 
-import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -36,69 +35,56 @@ class MovieViewModel(private val movieRepository: MovieRepository) : ViewModel()
     private var _movieInfo = MutableLiveData<Response<MovieInfoResponse>>()
     val movieInfo: LiveData<Response<MovieInfoResponse>> = _movieInfo
 
-    private var _insertMovieInfoIntoFavoriteFlag = MutableLiveData<Boolean>()
-    val insertMovieInfoIntoFavoriteFlag: LiveData<Boolean> = _insertMovieInfoIntoFavoriteFlag
-
     private fun getDailyBoxOffice(targetDate: String) {
         viewModelScope.launch {
-            kotlin.runCatching { movieRepository.getDailyBoxOffice(targetDate) }
-                .onSuccess {
-                    if (it.isSuccessful) {
-                        _dailyBoxOfficeMovies.value = it
-                        Log.d(tag, "getDailyBoxOffice success : ${it.body()}")
-                    } else {
-                        Log.d(tag, "getDailyBoxOffice failure : ${it.errorBody()}")
-                    }
+            kotlin.runCatching { movieRepository.getDailyBoxOffice(targetDate) }.onSuccess {
+                if (it.isSuccessful) {
+                    _dailyBoxOfficeMovies.value = it
+                    Log.d(tag, "getDailyBoxOffice success : ${it.body()}")
+                } else {
+                    Log.d(tag, "getDailyBoxOffice failure : ${it.errorBody()}")
                 }
-                .onFailure {
-                    Log.e(tag, "getDailyBoxOffice error", it)
-                }
+            }.onFailure {
+                Log.e(tag, "getDailyBoxOffice error", it)
+            }
         }
     }
 
     private fun getWeeklyBoxOffice(targetDate: String) {
         viewModelScope.launch {
-            kotlin.runCatching { movieRepository.getWeeklyBoxOffice(targetDate) }
-                .onSuccess {
-                    if (it.isSuccessful) {
-                        _weeklyBoxOfficeMovies.value = it
-                        Log.d(tag, "getWeeklyBoxOffice success : ${it.body()}")
-                    } else {
-                        Log.d(tag, "getWeeklyBoxOffice failure : ${it.errorBody()}")
-                    }
+            kotlin.runCatching { movieRepository.getWeeklyBoxOffice(targetDate) }.onSuccess {
+                if (it.isSuccessful) {
+                    _weeklyBoxOfficeMovies.value = it
+                    Log.d(tag, "getWeeklyBoxOffice success : ${it.body()}")
+                } else {
+                    Log.d(tag, "getWeeklyBoxOffice failure : ${it.errorBody()}")
                 }
-                .onFailure {
-                    Log.e(tag, "getWeeklyBoxOffice error", it)
-                }
+            }.onFailure {
+                Log.e(tag, "getWeeklyBoxOffice error", it)
+            }
         }
     }
 
     internal fun getMovieInfo(movieCode: String) {
         viewModelScope.launch {
-            kotlin.runCatching { movieRepository.getMovieInfo(movieCode) }
-                .onSuccess {
-                    if (it.isSuccessful) {
-                        _movieInfo.value = it
-                        Log.d(tag, "getMovieInfo success : ${it.body()}")
-                    } else {
-                        Log.d(tag, "getMovieInfo failure : ${it.errorBody()}")
-                    }
+            kotlin.runCatching { movieRepository.getMovieInfo(movieCode) }.onSuccess {
+                if (it.isSuccessful) {
+                    _movieInfo.value = it
+                    Log.d(tag, "getMovieInfo success : ${it.body()}")
+                } else {
+                    Log.d(tag, "getMovieInfo failure : ${it.errorBody()}")
                 }
-                .onFailure {
-                    Log.e(tag, "getMovieInfo error", it)
-                }
+            }.onFailure {
+                Log.e(tag, "getMovieInfo error", it)
+            }
         }
     }
 
     internal fun insertMovieInfoIntoFavorite(movieEntity: MovieEntity) {
         viewModelScope.launch(Dispatchers.IO) {
-            kotlin.runCatching {
-                movieRepository.insertMovieInfoIntoFavorite(movieEntity)
-                println("Inserting value : $movieEntity")
-                _insertMovieInfoIntoFavoriteFlag.postValue(true)
-            }.onFailure {
-                _insertMovieInfoIntoFavoriteFlag.postValue(false)
-            }
+            kotlin.runCatching { movieRepository.insertMovieInfoIntoFavorite(movieEntity) }
+                .onSuccess { println("Insertion success") }
+                .onFailure { println("Insertion failure") }
         }
     }
 }
