@@ -44,25 +44,32 @@ class WeeklyBoxOfficeAdapter(
         fun bind(movie: WeeklyBoxOfficeList) {
 
             with(binding) {
-                tvItemMovieRank.text = movie.rank
-                when (movie.rank) {
-                    "1" -> {
-                        this.tvItemMovieRank.setTextColor(Color.YELLOW)
-                    }
-                    "2" -> {
-                        this.tvItemMovieRank.setTextColor(Color.GRAY)
-                    }
-                    "3" -> {
-                        this.tvItemMovieRank.setTextColor(Color.RED)
-                    }
-                    else -> {
-                        this.tvItemMovieRank.setTextColor(Color.BLACK)
+
+                tvItemMovieRank.apply {
+                    movie.rank.also {
+                        when (it) {
+                            "1" -> {
+                                setTextColor(Color.YELLOW)
+                            }
+                            "2" -> {
+                                setTextColor(Color.GRAY)
+                            }
+                            "3" -> {
+                                setTextColor(Color.RED)
+                            }
+                            else -> {
+                                setTextColor(Color.BLACK)
+                            }
+                        }
+                        text = it
                     }
                 }
-                with(tvItemMovieTitle) {
+
+                tvItemMovieTitle.apply {
                     this.text = movie.title
                     isSelected = true
                 }
+
                 tvItemMovieAudienceTerm.text = "오늘 : ${movie.weeklyAudienceCount}명"
                 tvItemMovieAudienceTotal.text = "전체 : ${movie.totalAudienceCount}명"
 
