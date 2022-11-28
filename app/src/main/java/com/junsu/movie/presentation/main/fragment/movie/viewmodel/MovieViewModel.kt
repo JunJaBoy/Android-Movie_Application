@@ -84,7 +84,7 @@ class MovieViewModel(private val movieRepository: MovieRepository) : ViewModel()
     }
 
     internal fun getMovieStory(movieTitle: String) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             kotlin.runCatching {
                 movieRepository.getMovieStory(movieTitle)
             }.onSuccess {
@@ -92,6 +92,7 @@ class MovieViewModel(private val movieRepository: MovieRepository) : ViewModel()
                     it ?: "NULL"
                 )
             }.onFailure {
+                _movieStory.postValue("NULL")
                 Log.d(tag, "getMovieStory error")
             }
         }
@@ -99,9 +100,13 @@ class MovieViewModel(private val movieRepository: MovieRepository) : ViewModel()
 
     internal fun insertMovieInfoIntoFavorite(movieEntity: MovieEntity) {
         viewModelScope.launch(Dispatchers.IO) {
-            kotlin.runCatching { movieRepository.insertMovieInfoIntoFavorite(movieEntity) }
-                .onSuccess { println("Insertion success") }
-                .onFailure { println("Insertion failure") }
+            kotlin.runCatching {
+                movieRepository.insertMovieInfoIntoFavorite(movieEntity)
+            }.onSuccess {
+                println("Insertion success")
+            }.onFailure {
+                println("Insertion failure")
+            }
         }
     }
 }

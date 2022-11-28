@@ -1,5 +1,6 @@
 package com.junsu.movie.data.repository.main
 
+import android.util.Log
 import androidx.annotation.WorkerThread
 import com.junsu.movie.data.api.RetrofitClient.API_KEY
 import com.junsu.movie.data.api.boxOfficeApiService
@@ -26,13 +27,17 @@ class MovieRepository {
         return movieApiService.getMovieInfo(API_KEY, movieCode)
     }
 
-    suspend fun getMovieStory(movieTitle: String): String? {
+    fun getMovieStory(movieTitle: String): String? {
         Jsoup.connect(
             "https://m.search.naver.com/search.naver?sm=mtp_hty.top&where=m&query=영화+${movieTitle}"
-        ).get().select(".desc _text").run {
+        ).get().select(".desc").run {
             return if (this.isEmpty().not()) {
+                // TODO remove
+                Log.d("MovieRepository", "Success")
                 this.text()
             } else {
+                // TODO remove
+                Log.d("MovieRepository", "Failure")
                 null
             }
         }
