@@ -24,7 +24,9 @@ class MovieFragment : BaseFragment<FragmentMovieBinding>(
     R.layout.fragment_movie
 ) {
 
+    // 여기 조금 더러움.. 나중에 사용하는 사람이 Pair로 잘 수정해서 쓰겠지~
     private var movieInfo: MovieInfo? = null
+    private var movieStory: String? = null
 
     private val viewModel by lazy {
         ViewModelProvider(
@@ -94,21 +96,29 @@ class MovieFragment : BaseFragment<FragmentMovieBinding>(
             response.body().let {
                 movieInfo = it!!.movieInfoResult.movieInfo
 
-                initDialogBinding(dialogBinding, dialog)
-
                 movieInfoDialogActorsAdapter.updateActors(movieInfo!!.actors)
                 movieInfoDialogDirectorsAdapter.updateDirectors(movieInfo!!.directors)
                 movieInfoDialogGenresAdapter.updateGenres(movieInfo!!.genres)
 
+                viewModel.getMovieStory(movieInfo!!.title)
             }
+        }
+
+        viewModel.movieStory.observe(
+            requireActivity()
+        ) {
+            movieStory = it
+
+            initDialogBinding(dialogBinding, dialog)
         }
     }
 
     @SuppressLint("SetTextI18n")
     private fun initDialogBinding(
         dialogBinding: DialogFragmentMovieMovieInfoBinding,
-        dialog: Dialog
-    ) {
+        dialog: Dialog,
+
+        ) {
         with(dialogBinding) {
 
             rvDialogFragmentMovieMovieInfoTitleActors.adapter =
@@ -124,6 +134,7 @@ class MovieFragment : BaseFragment<FragmentMovieBinding>(
             tvDialogFragmentMovieMovieInfoAudit.text = movieInfo!!.audits[0].audit
             tvDialogFragmentMovieMovieInfoRunningTime.text = "${movieInfo!!.runningTime}분"
             tvDialogFragmentMovieMovieInfoReleaseDate.text = movieInfo!!.releaseDate
+            tvDialogFragmentMovieMovieInfoStory.text = movieStory
             tvDialogFragmentMovieMovieInfoAddClose.setOnClickListener {
                 dialog.dismiss()
             }

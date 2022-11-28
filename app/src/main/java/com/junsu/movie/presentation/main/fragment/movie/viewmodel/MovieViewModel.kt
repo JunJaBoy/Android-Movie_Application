@@ -35,6 +35,9 @@ class MovieViewModel(private val movieRepository: MovieRepository) : ViewModel()
     private val _movieInfo = MutableLiveData<Response<MovieInfoResponse>>()
     val movieInfo: LiveData<Response<MovieInfoResponse>> = _movieInfo
 
+    private val _movieStory = MutableLiveData<String>()
+    val movieStory: LiveData<String> = _movieStory
+
     private fun getDailyBoxOffice(targetDate: String) {
         viewModelScope.launch {
             kotlin.runCatching { movieRepository.getDailyBoxOffice(targetDate) }.onSuccess {
@@ -80,11 +83,30 @@ class MovieViewModel(private val movieRepository: MovieRepository) : ViewModel()
         }
     }
 
+    internal fun getMovieStory(movieTitle: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            kotlin.runCatching {
+                movieRepository.getMovieStory(movieTitle)
+            }.onSuccess {
+                _movieStory.postValue(
+                    it ?: "NULL"
+                )
+            }.onFailure {
+                _movieStory.postValue("NULL")
+                Log.d(tag, "getMovieStory error")
+            }
+        }
+    }
+
     internal fun insertMovieInfoIntoFavorite(movieEntity: MovieEntity) {
         viewModelScope.launch(Dispatchers.IO) {
-            kotlin.runCatching { movieRepository.insertMovieInfoIntoFavorite(movieEntity) }
-                .onSuccess { println("Insertion success") }
-                .onFailure { println("Insertion failure") }
+            kotlin.runCatching {
+                movieRepository.insertMovieInfoIntoFavorite(movieEntity)
+            }.onSuccess {
+                println("Insertion success")
+            }.onFailure {
+                println("Insertion failure")
+            }
         }
     }
 }
