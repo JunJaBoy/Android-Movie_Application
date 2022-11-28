@@ -1,6 +1,5 @@
 package com.junsu.movie.presentation.main.fragment.mypage.view
 
-import com.junsu.movie.data.repository.main.MyPageRepository
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +8,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import com.junsu.movie.common.OnFavoriteItemClickListener
 import com.junsu.movie.data.model.MovieEntity
+import com.junsu.movie.data.repository.main.MyPageRepository
 import com.junsu.movie.presentation.base.BaseFragment
 import com.junsu.movie.presentation.main.fragment.mypage.adapter.MyPageFavoritesAdapter
 import com.junsu.movie.presentation.main.fragment.mypage.viewmodel.MyPageViewModel

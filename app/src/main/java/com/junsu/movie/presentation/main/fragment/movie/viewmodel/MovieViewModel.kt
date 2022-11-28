@@ -26,13 +26,13 @@ class MovieViewModel(private val movieRepository: MovieRepository) : ViewModel()
         getWeeklyBoxOffice(getDummyDate())
     }
 
-    private var _dailyBoxOfficeMovies = MutableLiveData<Response<DailyBoxOfficeResponse>>()
+    private val _dailyBoxOfficeMovies = MutableLiveData<Response<DailyBoxOfficeResponse>>()
     val dailyBoxOfficeMovies: LiveData<Response<DailyBoxOfficeResponse>> = _dailyBoxOfficeMovies
 
-    private var _weeklyBoxOfficeMovies = MutableLiveData<Response<WeeklyBoxOfficeResponse>>()
+    private val _weeklyBoxOfficeMovies = MutableLiveData<Response<WeeklyBoxOfficeResponse>>()
     val weeklyBoxOfficeMovies: LiveData<Response<WeeklyBoxOfficeResponse>> = _weeklyBoxOfficeMovies
 
-    private var _movieInfo = MutableLiveData<Response<MovieInfoResponse>>()
+    private val _movieInfo = MutableLiveData<Response<MovieInfoResponse>>()
     val movieInfo: LiveData<Response<MovieInfoResponse>> = _movieInfo
 
     private fun getDailyBoxOffice(targetDate: String) {

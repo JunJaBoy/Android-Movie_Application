@@ -16,4 +16,5 @@
     <string name="cancel">취소</string>
     <string name="accept">확인</string>
     <string name="my_page_viewmodel_failed_to_load_list">목록 불러오기 실패..</string>
+    <string name="dialog_fragment_movie_movie_info_story">Story</string>
 </resources>
