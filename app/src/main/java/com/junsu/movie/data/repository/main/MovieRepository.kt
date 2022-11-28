@@ -32,12 +32,8 @@ class MovieRepository {
             "https://m.search.naver.com/search.naver?sm=mtp_hty.top&where=m&query=영화+${movieTitle}"
         ).get().select(".desc").run {
             return if (this.isEmpty().not()) {
-                // TODO remove
-                Log.d("MovieRepository", "Success")
                 this.text()
             } else {
-                // TODO remove
-                Log.d("MovieRepository", "Failure")
                 null
             }
         }
