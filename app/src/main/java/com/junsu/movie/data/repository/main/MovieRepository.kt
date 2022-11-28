@@ -9,6 +9,7 @@ import com.junsu.movie.data.model.DailyBoxOfficeResponse
 import com.junsu.movie.data.model.MovieEntity
 import com.junsu.movie.data.model.MovieInfoResponse
 import com.junsu.movie.data.model.WeeklyBoxOfficeResponse
+import org.jsoup.Jsoup
 import retrofit2.Response
 
 class MovieRepository {
@@ -23,6 +24,18 @@ class MovieRepository {
 
     suspend fun getMovieInfo(movieCode: String): Response<MovieInfoResponse> {
         return movieApiService.getMovieInfo(API_KEY, movieCode)
+    }
+
+    suspend fun getMovieStory(movieTitle: String): String? {
+        Jsoup.connect(
+            "https://m.search.naver.com/search.naver?sm=mtp_hty.top&where=m&query=${movieTitle}"
+        ).get().select(".desc _text").run {
+            return if (this.isEmpty().not()) {
+                this.text()
+            } else {
+                null
+            }
+        }
     }
 
     @WorkerThread
