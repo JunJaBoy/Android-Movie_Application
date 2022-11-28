@@ -28,7 +28,7 @@ class MovieRepository {
 
     suspend fun getMovieStory(movieTitle: String): String? {
         Jsoup.connect(
-            "https://m.search.naver.com/search.naver?sm=mtp_hty.top&where=m&query=${movieTitle}"
+            "https://m.search.naver.com/search.naver?sm=mtp_hty.top&where=m&query=영화+${movieTitle}"
         ).get().select(".desc _text").run {
             return if (this.isEmpty().not()) {
                 this.text()
